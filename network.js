@@ -36,21 +36,33 @@
     orgNodes.forEach(o => {
       if (!o.expanded) return;
       if (!personNodes.has(o.id)) {
+        const n = o.org.people.length;
+        const perRing = 12;
         personNodes.set(o.id, o.org.people.map((p, j) => {
-          const a = Math.atan2(o.y - center.y, o.x - center.x)
-                  + (j - (o.org.people.length - 1) / 2) * 0.55;
+          const ring = Math.floor(j / perRing);
+          const inRing = Math.min(perRing, n - ring * perRing);
+          const radius = 110 + ring * 78;
+          const a = n <= 8
+            ? Math.atan2(o.y - center.y, o.x - center.x) + (j - (n - 1) / 2) * 0.55
+            : ((j % perRing) / inRing) * Math.PI * 2 + ring * 0.26;
           return {
             id: o.id + "p" + j, label: p.name, role: p.role + " — " + o.org.name, cat: o.cat,
-            r: 8, person: true,
-            x: o.x + Math.cos(a) * 110, y: o.y + Math.sin(a) * 110, vx: 0, vy: 0,
+            r: 8, person: true, radius,
+            url: p.url || "https://www.linkedin.com/search/results/all/?keywords=" + encodeURIComponent(p.name),
+            x: o.x + Math.cos(a) * radius, y: o.y + Math.sin(a) * radius, vx: 0, vy: 0,
           };
         }));
       }
       personNodes.get(o.id).forEach(p => {
         nodes.push(p);
-        links.push({ s: o, t: p, len: 110 });
+        links.push({ s: o, t: p, len: p.radius });
       });
     });
+    /* grow the canvas when a large cluster is open */
+    H = nodes.length > 30 ? 860 : 640;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    svg.style.height = H + "px";
+    center.y = H / 2;
     draw();
     kick();
   }
@@ -110,11 +122,18 @@
       attachTip(g, node);
       if (node.org) {
         g.style.cursor = "pointer";
-        g.addEventListener("click", e => {
+        g.addEventListener("click", () => {
           if (g.__dragged) return;
           if (!node.expandable) return;
           node.expanded = !node.expanded;
           rebuild();
+        });
+      }
+      if (node.person && node.url) {
+        g.style.cursor = "pointer";
+        g.addEventListener("click", () => {
+          if (g.__dragged) return;
+          window.open(node.url, "_blank", "noopener");
         });
       }
       return g;
@@ -205,7 +224,9 @@
     g.addEventListener("pointermove", e => {
       if (node.center) return;
       const hint = node.expandable && !node.person
-        ? `<br><em>${node.expanded ? "click to hide people" : "click to see people"}</em>` : "";
+        ? `<br><em>${node.expanded ? "click to hide people" : "click to see people"}</em>`
+        : node.person && node.url
+          ? `<br><em>click → ${node.url.includes("/search/") ? "find on LinkedIn" : "profile"}</em>` : "";
       tip.innerHTML = `<strong>${node.label}</strong><span class="t-meta">${node.role || ""}${hint}</span>`;
       tip.style.opacity = 1;
       let x = e.clientX + 14, y = e.clientY + 14;

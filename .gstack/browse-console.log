@@ -1,0 +1,21 @@
+[2026-08-14T15:30:08.137Z] [error] Failed to load resource: the server responded with a status of 401 (Unauthorized)
+[2026-08-14T15:30:20.209Z] [warning] <link rel=preload> must have a valid `as` value
+[2026-08-14T15:30:20.210Z] [warning] <link rel=preload> must have a valid `as` value
+[2026-08-14T15:30:20.210Z] [warning] <link rel=preload> must have a valid `as` value
+[2026-08-14T15:30:20.210Z] [warning] <link rel=preload> must have a valid `as` value
+[2026-08-14T15:30:20.210Z] [warning] <link rel=preload> must have a valid `as` value
+[2026-08-14T15:30:20.210Z] [warning] <link rel=preload> must have a valid `as` value
+[2026-08-14T15:30:21.599Z] [warning] [GSI_LOGGER]: Your client application may not display the Google One Tap in its default position. When FedCM becomes mandatory, One Tap only displays in the default position. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#layout
+[2026-08-14T15:30:21.599Z] [warning] [GSI_LOGGER]: Your client application uses one of the Google One Tap prompt UI status methods that may stop functioning when FedCM becomes mandatory. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#display_moment and https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#skipped_moment
+[2026-08-14T15:30:21.599Z] [warning] [GSI_LOGGER]: Currently, you disable FedCM on Google One Tap. FedCM for One Tap will become mandatory starting Oct 2024, and you won’t be able to disable it. Refer to the migration guide to update your code accordingly to ensure users will not be blocked from logging in. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration
+[2026-08-14T15:30:22.178Z] [endGroup] EvalError
+    at or (https://client.protechts.net/PXdOjV695v/main.min.js:2:68297)
+    at qt (https://client.protechts.net/PXdOjV695v/main.min.js:2:75412)
+    at JS (https://client.protechts.net/PXdOjV695v/main.min.js:2:234902)
+    at JQ (https://client.protechts.net/PXdOjV695v/main.min.js:2:234525)
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:236279
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:236285
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:236750
+[2026-08-14T15:30:22.826Z] [debug] TMS load event sent successfully: 
+[2026-08-14T15:30:22.826Z] [debug] External tag load event sent successfully: 
+[2026-08-14T15:30:22.862Z] [error] requestStorageAccess: Permission denied.
