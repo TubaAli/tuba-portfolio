@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuba Ali — Network</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>Tuba Ali</h1>
+    <p>The people and institutions I build with</p>
+  </div>
+  <nav>
+    <a href="index.html">Compass</a>
+    <a href="network.html" class="active">Network</a>
+  </nav>
+</header>
+
+<main>
+  <div class="controls">
+    <div class="toggle" role="tablist" aria-label="Graph view">
+      <button id="btnPeople" class="active">People</button>
+      <button id="btnOrgs">Organizations</button>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="graph-card">
+    <svg id="graph" role="img" aria-label="Network graph of people and organizations connected to Tuba Ali"></svg>
+  </div>
+  <p class="section-note" style="margin-top:14px">
+    Drag nodes to rearrange. Hover for the relationship. Faculty from
+    <a href="https://sds.chibatech.dev/faculty/" target="_blank" rel="noopener">SDS · ChibaTech</a>;
+    edit <code>data.js</code> to add or remove anyone.
+  </p>
+</main>
+
+<div id="tip"></div>
+<script src="data.js"></script>
+<script src="network.js"></script>
+</body>
+</html>
