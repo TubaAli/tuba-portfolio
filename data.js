@@ -104,33 +104,41 @@ const CATEGORIES = {
   recognition: { label: "Recognition",  light: "#e34948", dark: "#e66767" },
 };
 
-const PEOPLE = [
-  /* SDS faculty — https://sds.chibatech.dev/faculty/ */
-  { name: "Mizuki Oka",            role: "Engineer of Artificial Life",              org: "SDS · ChibaTech", cat: "education" },
-  { name: "Catharina Maracke",     role: "Legal Scholar of Digital Governance",      org: "SDS · ChibaTech", cat: "education" },
-  { name: "Daum Kim",              role: "Designer of Digital Culture",              org: "SDS · ChibaTech", cat: "education" },
-  { name: "Hiroki Kojima",         role: "Scientist of Life & Information",          org: "SDS · ChibaTech", cat: "education" },
-  { name: "Ira Winder",            role: "Engineer of Emergence & Complexity",       org: "SDS · ChibaTech", cat: "education" },
-  { name: "Joseph Austerweil",     role: "Scientist of Cognition & Machine Learning",org: "SDS · ChibaTech", cat: "education" },
-  { name: "Sputniko! (Hiromi Ozaki)", role: "Designer of Speculative Futures",       org: "SDS · ChibaTech", cat: "education" },
-  /* From Tuba's institutions — edit freely */
-  { name: "Annie Chang",           role: "Director, Women in Technology Japan",      org: "WIT Japan",       cat: "community" },
-  { name: "Hiroshi Mikitani",      role: "Chairman & CEO, Rakuten Group",            org: "Rakuten",         cat: "work" },
-  { name: "Tadashi Yanai",         role: "Chairman & CEO, Fast Retailing",           org: "Fast Retailing",  cat: "work" },
-];
-
+/* Organizations are the main view. Click an org node to reveal its people.
+   To add a connection (e.g. from LinkedIn): copy a line inside `people`,
+   change the name and role, save, push. Empty `people: []` is fine. */
 const ORGS = [
-  { name: "Rakuten Payment",              role: "Senior Product Manager, 2023–present",        cat: "work" },
-  { name: "Fast Retailing (Uniqlo)",      role: "PM & Social Platform Lead, 2019–2022",        cat: "work" },
-  { name: "SDS · Chiba Institute of Technology", role: "Master's in Design and Science, 2026–", cat: "education" },
-  { name: "MIT Professional Education",   role: "System Thinking certificate, 2024",           cat: "education" },
-  { name: "Delhi Technological University", role: "B.Tech Software Engineering, 2015–2019",    cat: "education" },
-  { name: "Women in Technology Tokyo",    role: "Technical Consultant, 900+ members",          cat: "community" },
-  { name: "Japan Venture Academy",        role: "Coach, 2023 — mentored 15 students",          cat: "community" },
-  { name: "KK myAshisuto",                role: "Independent Product Advisor — AI trust",      cat: "advisory" },
-  { name: "NEXTPUBLIC INC",               role: "Independent Advisor — AI/DX, public sector",  cat: "advisory" },
-  { name: "JITTN",                        role: "Project Lead — Live-Tech Highway, VISTORA",   cat: "fellowship" },
-  { name: "Nippon Foundation · Salzburg Global", role: "Fellow — 1 of 45, Japan–India cohort", cat: "fellowship" },
-  { name: "Smart India Hackathon",        role: "Winner 2019 — Rog Alert",                     cat: "recognition" },
-  { name: "Harvard PAIA",                 role: "Delegate 2018",                               cat: "recognition" },
+  { name: "Rakuten Payment", role: "Senior Product Manager, 2023–present", cat: "work",
+    people: [
+      { name: "Hiroshi Mikitani", role: "Chairman & CEO, Rakuten Group" },
+      /* { name: "ADD FROM LINKEDIN", role: "their role" }, */
+    ] },
+  { name: "Fast Retailing (Uniqlo)", role: "PM & Social Platform Lead, 2019–2022", cat: "work",
+    people: [
+      { name: "Tadashi Yanai", role: "Chairman & CEO, Fast Retailing" },
+      /* { name: "ADD FROM LINKEDIN", role: "their role" }, */
+    ] },
+  { name: "SDS · Chiba Institute of Technology", role: "Master's in Design and Science, 2026–", cat: "education",
+    people: [
+      { name: "Mizuki Oka",             role: "Engineer of Artificial Life" },
+      { name: "Catharina Maracke",      role: "Legal Scholar of Digital Governance" },
+      { name: "Daum Kim",               role: "Designer of Digital Culture" },
+      { name: "Hiroki Kojima",          role: "Scientist of Life & Information" },
+      { name: "Ira Winder",             role: "Engineer of Emergence & Complexity" },
+      { name: "Joseph Austerweil",      role: "Scientist of Cognition & Machine Learning" },
+      { name: "Sputniko! (Hiromi Ozaki)", role: "Designer of Speculative Futures" },
+    ] },
+  { name: "MIT Professional Education", role: "System Thinking certificate, 2024", cat: "education", people: [] },
+  { name: "Delhi Technological University", role: "B.Tech Software Engineering, 2015–2019", cat: "education", people: [] },
+  { name: "Women in Technology Tokyo", role: "Technical Consultant, 900+ members", cat: "community",
+    people: [
+      { name: "Annie Chang", role: "Director, Women in Technology Japan" },
+    ] },
+  { name: "Japan Venture Academy", role: "Coach, 2023 — mentored 15 students", cat: "community", people: [] },
+  { name: "KK myAshisuto", role: "Independent Product Advisor — AI trust", cat: "advisory", people: [] },
+  { name: "NEXTPUBLIC INC", role: "Independent Advisor — AI/DX, public sector", cat: "advisory", people: [] },
+  { name: "JITTN", role: "Project Lead — Live-Tech Highway, VISTORA", cat: "fellowship", people: [] },
+  { name: "Nippon Foundation · Salzburg Global", role: "Fellow — 1 of 45, Japan–India cohort", cat: "fellowship", people: [] },
+  { name: "Smart India Hackathon", role: "Winner 2019 — Rog Alert", cat: "recognition", people: [] },
+  { name: "Harvard PAIA", role: "Delegate 2018", cat: "recognition", people: [] },
 ];

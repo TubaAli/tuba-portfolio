@@ -1,4 +1,4 @@
-/* ============ NETWORK — force-directed graph, two views ============ */
+/* ============ NETWORK — orgs in main view, click an org to reveal its people ============ */
 (function () {
   const svg = document.getElementById("graph");
   const NS = "http://www.w3.org/2000/svg";
@@ -16,48 +16,55 @@
   sizeSvg();
   addEventListener("resize", () => { sizeSvg(); kick(); });
 
-  let nodes = [], links = [], view = "people", raf = null, alpha = 0;
+  /* ---- persistent node objects (positions survive expand/collapse) ---- */
+  const center = { id: "tuba", label: "Tuba Ali", center: true, r: 26, x: W / 2, y: H / 2, vx: 0, vy: 0, fixed: true };
+  const orgNodes = ORGS.map((o, i) => {
+    const a = (i / ORGS.length) * Math.PI * 2 - Math.PI / 2;
+    return {
+      id: "org" + i, org: o, label: o.name, role: o.role, cat: o.cat,
+      r: 13, expandable: o.people.length > 0, expanded: false,
+      x: W / 2 + Math.cos(a) * 225, y: H / 2 + Math.sin(a) * 225, vx: 0, vy: 0,
+    };
+  });
+  const personNodes = new Map(); /* orgNode.id -> [nodes] */
 
-  function buildView(which) {
-    view = which;
-    const items = which === "people" ? PEOPLE : ORGS;
-    const center = { id: "tuba", label: "Tuba Ali", center: true, r: 26, x: W / 2, y: H / 2, vx: 0, vy: 0, fixed: true };
-    nodes = [center];
-    links = [];
-    const n = items.length;
-    items.forEach((it, i) => {
-      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
-      const node = {
-        id: which + i,
-        label: it.name,
-        sub: which === "people" ? it.org : "",
-        role: it.role,
-        cat: it.cat,
-        r: which === "people" ? 11 : 13,
-        x: W / 2 + Math.cos(a) * 200 + (i % 3) * 7,
-        y: H / 2 + Math.sin(a) * 200 + (i % 5) * 5,
-        vx: 0, vy: 0,
-      };
-      nodes.push(node);
-      links.push({ s: center, t: node, len: which === "people" ? 195 : 235 });
+  let nodes = [], links = [], raf = null, alpha = 0;
+
+  function rebuild() {
+    nodes = [center, ...orgNodes];
+    links = orgNodes.map(o => ({ s: center, t: o, len: 235 }));
+    orgNodes.forEach(o => {
+      if (!o.expanded) return;
+      if (!personNodes.has(o.id)) {
+        personNodes.set(o.id, o.org.people.map((p, j) => {
+          const a = Math.atan2(o.y - center.y, o.x - center.x)
+                  + (j - (o.org.people.length - 1) / 2) * 0.55;
+          return {
+            id: o.id + "p" + j, label: p.name, role: p.role + " — " + o.org.name, cat: o.cat,
+            r: 8, person: true,
+            x: o.x + Math.cos(a) * 110, y: o.y + Math.sin(a) * 110, vx: 0, vy: 0,
+          };
+        }));
+      }
+      personNodes.get(o.id).forEach(p => {
+        nodes.push(p);
+        links.push({ s: o, t: p, len: 110 });
+      });
     });
-    renderLegend(items);
     draw();
     kick();
   }
 
-  function renderLegend(items) {
-    const cats = [...new Set(items.map(i => i.cat))];
-    legend.innerHTML = cats
-      .map(c => `<span><i style="background:${catColor(c)}"></i>${CATEGORIES[c].label}</span>`)
-      .join("");
-  }
+  /* ---- legend ---- */
+  legend.innerHTML = [...new Set(ORGS.map(o => o.cat))]
+    .map(c => `<span><i style="background:${catColor(c)}"></i>${CATEGORIES[c].label}</span>`)
+    .join("");
 
   /* ---- render ---- */
   let edgeEls = [], nodeEls = [];
   function draw() {
     svg.innerHTML = "";
-    edgeEls = links.map(l => {
+    edgeEls = links.map(() => {
       const e = document.createElementNS(NS, "line");
       e.setAttribute("class", "edge");
       svg.appendChild(e);
@@ -68,24 +75,48 @@
       g.setAttribute("class", "node" + (node.center ? " center" : ""));
       const c = document.createElementNS(NS, "circle");
       c.setAttribute("r", node.r);
-      if (!node.center) c.setAttribute("fill", catColor(node.cat));
+      if (!node.center) {
+        c.setAttribute("fill", catColor(node.cat));
+        if (node.person) c.setAttribute("fill-opacity", "0.75");
+      }
       g.appendChild(c);
+      if (node.expandable && !node.expanded) {
+        const plus = document.createElementNS(NS, "text");
+        plus.setAttribute("text-anchor", "middle");
+        plus.setAttribute("y", 4);
+        plus.setAttribute("font-size", 13);
+        plus.setAttribute("font-weight", 700);
+        plus.setAttribute("fill", "var(--page)");
+        plus.setAttribute("pointer-events", "none");
+        plus.textContent = "+";
+        g.appendChild(plus);
+      }
       const t = document.createElementNS(NS, "text");
       t.setAttribute("text-anchor", "middle");
       t.setAttribute("y", node.r + 15);
+      if (node.person) t.setAttribute("font-size", 11);
       t.textContent = node.label;
       g.appendChild(t);
-      if (node.sub) {
+      if (node.expandable) {
         const s = document.createElementNS(NS, "text");
         s.setAttribute("class", "sub");
         s.setAttribute("text-anchor", "middle");
         s.setAttribute("y", node.r + 28);
-        s.textContent = node.sub;
+        s.textContent = node.expanded ? "click to collapse" : `+ ${node.org.people.length} people`;
         g.appendChild(s);
       }
       svg.appendChild(g);
       attachDrag(g, node);
       attachTip(g, node);
+      if (node.org) {
+        g.style.cursor = "pointer";
+        g.addEventListener("click", e => {
+          if (g.__dragged) return;
+          if (!node.expandable) return;
+          node.expanded = !node.expanded;
+          rebuild();
+        });
+      }
       return g;
     });
     position();
@@ -101,7 +132,6 @@
 
   /* ---- tiny force simulation ---- */
   function tick() {
-    /* springs */
     links.forEach(l => {
       const dx = l.t.x - l.s.x, dy = l.t.y - l.s.y;
       const d = Math.max(Math.hypot(dx, dy), 1);
@@ -110,21 +140,20 @@
       if (!l.t.fixed) { l.t.vx -= fx; l.t.vy -= fy; }
       if (!l.s.fixed) { l.s.vx += fx; l.s.vy += fy; }
     });
-    /* pairwise repulsion */
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
         const a = nodes[i], b = nodes[j];
         const dx = b.x - a.x, dy = b.y - a.y;
         let d2 = dx * dx + dy * dy;
         if (d2 < 1) d2 = 1;
-        const f = (view === "orgs" ? 4200 : 2600) / d2;
+        const k = (a.person || b.person) ? 2100 : 4200;
+        const f = k / d2;
         const d = Math.sqrt(d2);
         const fx = (dx / d) * f, fy = (dy / d) * f;
         if (!a.fixed) { a.vx -= fx; a.vy -= fy; }
         if (!b.fixed) { b.vx += fx; b.vy += fy; }
       }
     }
-    /* integrate + keep in frame */
     nodes.forEach(n => {
       if (n.fixed) return;
       n.vx *= 0.86; n.vy *= 0.86;
@@ -143,24 +172,30 @@
     raf = requestAnimationFrame(tick);
   }
 
-  /* ---- drag ---- */
+  /* ---- drag (click vs drag disambiguation) ---- */
   function attachDrag(g, node) {
-    let dragging = false;
+    let dragging = false, moved = 0;
     g.addEventListener("pointerdown", e => {
       if (node.center) return;
-      dragging = true;
+      dragging = true; moved = 0; g.__dragged = false;
       node.fixed = true;
       g.setPointerCapture(e.pointerId);
       e.preventDefault();
     });
     g.addEventListener("pointermove", e => {
       if (!dragging) return;
+      moved++;
+      if (moved > 3) g.__dragged = true;
       const box = svg.getBoundingClientRect();
       node.x = ((e.clientX - box.left) / box.width) * W;
       node.y = ((e.clientY - box.top) / box.height) * H;
       kick();
     });
-    const up = () => { dragging = false; node.fixed = false; };
+    const up = () => {
+      dragging = false;
+      node.fixed = false;
+      setTimeout(() => (g.__dragged = false), 0);
+    };
     g.addEventListener("pointerup", up);
     g.addEventListener("pointercancel", up);
   }
@@ -169,7 +204,9 @@
   function attachTip(g, node) {
     g.addEventListener("pointermove", e => {
       if (node.center) return;
-      tip.innerHTML = `<strong>${node.label}</strong><span class="t-meta">${node.role || ""}</span>`;
+      const hint = node.expandable && !node.person
+        ? `<br><em>${node.expanded ? "click to hide people" : "click to see people"}</em>` : "";
+      tip.innerHTML = `<strong>${node.label}</strong><span class="t-meta">${node.role || ""}${hint}</span>`;
       tip.style.opacity = 1;
       let x = e.clientX + 14, y = e.clientY + 14;
       if (x + 290 > innerWidth) x = e.clientX - 290;
@@ -178,14 +215,12 @@
     g.addEventListener("pointerleave", () => (tip.style.opacity = 0));
   }
 
-  /* ---- view toggle ---- */
-  const bp = document.getElementById("btnPeople");
-  const bo = document.getElementById("btnOrgs");
-  bp.addEventListener("click", () => { bp.classList.add("active"); bo.classList.remove("active"); buildView("people"); });
-  bo.addEventListener("click", () => { bo.classList.add("active"); bp.classList.remove("active"); buildView("orgs"); });
-  dark.addEventListener("change", () => buildView(view));
+  dark.addEventListener("change", rebuild);
 
-  const initial = new URLSearchParams(location.search).get("view") === "orgs" ? "orgs" : "people";
-  if (initial === "orgs") { bo.classList.add("active"); bp.classList.remove("active"); }
-  buildView(initial);
+  /* deep-link: network.html?expand=sds pre-opens matching orgs */
+  const exp = new URLSearchParams(location.search).get("expand");
+  if (exp) orgNodes.forEach(o => {
+    if (o.expandable && o.label.toLowerCase().includes(exp.toLowerCase())) o.expanded = true;
+  });
+  rebuild();
 })();
