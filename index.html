@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuba Ali — Compass</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>Tuba Ali</h1>
+    <p>Product · AI agents · Tokyo — mapped on the SDS compass</p>
+  </div>
+  <nav>
+    <a href="index.html" class="active">Compass</a>
+    <a href="network.html">Network</a>
+  </nav>
+</header>
+
+<main>
+  <p class="section-note">
+    My work placed on the <a href="https://sds.chibatech.dev/research/" target="_blank" rel="noopener">Krebs Cycle of Creativity</a> —
+    the framework of SDS, Japan's first AI-native school: Science → Engineering → Design → Art,
+    each domain transforming the output of the previous. Hover or tap a dot.
+  </p>
+
+  <div class="compass-wrap">
+    <div class="compass-card">
+      <svg id="compass" viewBox="0 0 980 820" role="img" aria-label="Compass of projects across Science, Engineering, Design, and Art"></svg>
+    </div>
+    <aside class="panel empty" id="detail">
+      <span>Select a project dot<br>to see its story.</span>
+    </aside>
+  </div>
+
+  <div class="quad-lists" id="quadLists"></div>
+</main>
+
+<footer>Framework: Neri Oxman's Krebs Cycle of Creativity, as practiced at SDS · School of Design and Science, Chiba Institute of Technology.</footer>
+
+<div id="tip"></div>
+<script src="data.js"></script>
+<script src="compass.js"></script>
+</body>
+</html>
