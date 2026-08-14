@@ -36,7 +36,7 @@
     const [x1, y1] = pt(from, r), [x2, y2] = pt(to, r);
     el("path", {
       d: `M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`,
-      fill: "none", stroke: "var(--hairline)", "stroke-width": 1.2, "marker-end": "url(#arrow)"
+      fill: "none", stroke: "var(--baseline)", "stroke-width": 1.4, "marker-end": "url(#arrow)"
     });
   });
 
