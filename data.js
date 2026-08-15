@@ -203,5 +203,6 @@ const ORGS = [
       { name: "Yusuke Yasude", role: "CEO, Kizuki Co., Ltd." },
     ] },
   { name: "Smart India Hackathon", role: "Winner 2019 — Rog Alert", cat: "recognition", people: [] },
-  { name: "Harvard Project for Asian and International Affairs", role: "Delegate 2018", cat: "recognition", people: [] },
+  /* add url: "assets/hpair-certificate.pdf" once the certificate file is in assets/ */
+  { name: "Harvard Project for Asian and International Relations (HPAIR)", role: "Delegate 2018", cat: "recognition", people: [] },
 ];
