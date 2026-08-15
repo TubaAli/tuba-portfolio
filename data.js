@@ -110,13 +110,34 @@ const CATEGORIES = {
 const ORGS = [
   { name: "Rakuten Payment", role: "Senior Product Manager, 2023–present", cat: "work",
     people: [
-      { name: "Hiroshi Mikitani", role: "Chairman & CEO, Rakuten Group" },
-      /* { name: "ADD FROM LINKEDIN", role: "their role" }, */
+      { name: "[redacted]",  role: "CTO & Senior Executive Officer",              url: "https://www.linkedin.com/" },
+      { name: "[redacted]",    role: "Senior Manager, Cross Service Development",   url: "https://www.linkedin.com/" },
+      { name: "[redacted]",   role: "Distinguished Software Engineer & Architect", url: "https://www.linkedin.com/" },
+      { name: "[redacted]",   role: "Rakuten Payment",                             url: "https://www.linkedin.com/" },
+      { name: "[redacted]",    role: "Creative & Design",                           url: "https://www.linkedin.com/" },
+      { name: "[redacted]", role: "Conversational AI (ex-Rakuten; now Uber Japan)", url: "https://www.linkedin.com/" },
+      { name: "[redacted]",  role: "Data & CX (ex-Rakuten Payment; now NTT Data)", url: "https://www.linkedin.com/" },
+      { name: "[redacted]", role: "Vision ML Engineer (ex-Rakuten; now Blackstraw)", url: "https://www.linkedin.com/" },
     ] },
   { name: "Fast Retailing (Uniqlo)", role: "PM & Social Platform Lead, 2019–2022", cat: "work",
     people: [
-      { name: "Tadashi Yanai", role: "Chairman & CEO, Fast Retailing" },
-      /* { name: "ADD FROM LINKEDIN", role: "their role" }, */
+      { name: "[redacted]", role: "Group Executive Officer, CIO",           url: "https://www.linkedin.com/" },
+      { name: "[redacted]",   role: "CTO / Technical Director",               url: "https://www.linkedin.com/" },
+      { name: "[redacted]",   role: "ex-CSO/CIO/CTO; now VP & CIO, Eisai",    url: "https://www.linkedin.com/" },
+      { name: "[redacted]",    role: "Principal Strategist",                   url: "https://www.linkedin.com/" },
+      { name: "[redacted]",    role: "Product (UNIQLO)",                       url: "https://www.linkedin.com/" },
+      { name: "[redacted]",   role: "Frontend Infrastructure Manager",        url: "https://www.linkedin.com/" },
+      { name: "[redacted]",   role: "Engineering Manager",                    url: "https://www.linkedin.com/" },
+      { name: "[redacted]", role: "Store DX & RFID lead (10+ years)",       url: "https://www.linkedin.com/" },
+      { name: "[redacted]", role: "Manager, Uniqlo LINE mini-app (now Mercari)", url: "https://www.linkedin.com/" },
+      { name: "[redacted]",    role: "Manager, Engineering / Product",         url: "https://www.linkedin.com/" },
+      { name: "[redacted]",  role: "Manager, Engineering",                   url: "https://www.linkedin.com/" },
+      { name: "[redacted]",  role: "Director of EC, 2018–2022" },
+      { name: "[redacted]",      role: "Fast Retailing" },
+      { name: "[redacted]",      role: "Fast Retailing" },
+      { name: "[redacted]",        role: "Fast Retailing" },
+      { name: "[redacted]",     role: "Project Manager" },
+      { name: "[redacted]",     role: "Technical Product Manager, eCommerce" },
     ] },
   { name: "SDS · Chiba Institute of Technology", role: "Master's in Design and Science, 2026–", cat: "education",
     people: [
