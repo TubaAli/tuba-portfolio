@@ -110,13 +110,34 @@ const CATEGORIES = {
 const ORGS = [
   { name: "Rakuten Payment", role: "Senior Product Manager, 2023–present", cat: "work",
     people: [
-      { name: "Hiroshi Mikitani", role: "Chairman & CEO, Rakuten Group" },
-      /* { name: "ADD FROM LINKEDIN", role: "their role" }, */
+      { name: "Fernando Paulo",  role: "CTO & Senior Executive Officer",              url: "https://www.linkedin.com/in/fpaulo/" },
+      { name: "Louise Jones",    role: "Senior Manager, Cross Service Development",   url: "https://www.linkedin.com/in/louisemcjones/" },
+      { name: "Julien Cayzac",   role: "Distinguished Software Engineer & Architect", url: "https://www.linkedin.com/in/jcayzac/" },
+      { name: "Ai Uyen Luong",   role: "Rakuten Payment",                             url: "https://jp.linkedin.com/in/ai-uyen-luong-698256183" },
+      { name: "Diego Branco",    role: "Creative & Design",                           url: "https://www.linkedin.com/in/diego-branco/" },
+      { name: "Daniel Orenes Ferrández", role: "Conversational AI (ex-Rakuten; now Uber Japan)", url: "https://www.linkedin.com/in/danielorenesferrandez/" },
+      { name: "Jaivardhan Lal",  role: "Data & CX (ex-Rakuten Payment; now NTT Data)", url: "https://jp.linkedin.com/in/jaivardhan-lal" },
+      { name: "Judson Gabriel George", role: "Vision ML Engineer (ex-Rakuten; now Blackstraw)", url: "https://in.linkedin.com/in/judson-gabriel-george-13564388" },
     ] },
   { name: "Fast Retailing (Uniqlo)", role: "PM & Social Platform Lead, 2019–2022", cat: "work",
     people: [
-      { name: "Tadashi Yanai", role: "Chairman & CEO, Fast Retailing" },
-      /* { name: "ADD FROM LINKEDIN", role: "their role" }, */
+      { name: "Takahiro Tambara", role: "Group Executive Officer, CIO",           url: "https://uk.linkedin.com/in/takahiro-tambara-425599132" },
+      { name: "Shinpei Ohtani",   role: "CTO / Technical Director",               url: "https://jp.linkedin.com/in/shinpeiohtani" },
+      { name: "Makoto Hoketsu",   role: "ex-CSO/CIO/CTO; now VP & CIO, Eisai",    url: "https://jp.linkedin.com/in/mhoketsu" },
+      { name: "Mayank Shukla",    role: "Principal Strategist",                   url: "https://www.linkedin.com/in/shukla3/" },
+      { name: "Umang Chauhan",    role: "Product (UNIQLO)",                       url: "https://www.linkedin.com/in/thisumang/" },
+      { name: "Takuya Tatsumi",   role: "Frontend Infrastructure Manager",        url: "https://jp.linkedin.com/in/takuya-tatsumi-a64598a3" },
+      { name: "Thomas Karsten",   role: "Engineering Manager",                    url: "https://jp.linkedin.com/in/thomaskarsten" },
+      { name: "Takashi Ishikawa", role: "Store DX & RFID lead (10+ years)",       url: "https://www.linkedin.com/in/takashi-ishikawa-b8783357/" },
+      { name: "Maruti Nandan Sharma", role: "Manager, Uniqlo LINE mini-app (now Mercari)", url: "https://www.linkedin.com/in/maruti-nandan-sharma-81029934/" },
+      { name: "Pankaj Ajwani",    role: "Manager, Engineering / Product",         url: "https://www.linkedin.com/in/pankaj-ajwani-0409/" },
+      { name: "Swapnil Satpute",  role: "Manager, Engineering",                   url: "https://jp.linkedin.com/in/swapnil-satpute-7b670a51" },
+      { name: "Takahito Yasuno",  role: "Director of EC, 2018–2022" },
+      { name: "Steven Rose",      role: "Fast Retailing" },
+      { name: "Vijay Kumar",      role: "Fast Retailing" },
+      { name: "Faiz Alam",        role: "Fast Retailing" },
+      { name: "Ruijie Zhang",     role: "Project Manager" },
+      { name: "Manesh Patil",     role: "Technical Product Manager, eCommerce" },
     ] },
   { name: "SDS · Chiba Institute of Technology", role: "Master's in Design and Science, 2026–", cat: "education",
     people: [
