@@ -124,9 +124,12 @@
         g.style.cursor = "pointer";
         g.addEventListener("click", () => {
           if (g.__dragged) return;
-          if (!node.expandable) return;
-          node.expanded = !node.expanded;
-          rebuild();
+          if (node.expandable) {
+            node.expanded = !node.expanded;
+            rebuild();
+          } else if (node.org.url) {
+            window.open(node.org.url, "_blank", "noopener");
+          }
         });
       }
       if (node.person && node.url) {
@@ -226,7 +229,9 @@
       const hint = node.expandable && !node.person
         ? `<br><em>${node.expanded ? "click to hide people" : "click to see people"}</em>`
         : node.person && node.url
-          ? `<br><em>click → ${node.url.includes("/search/") ? "find on LinkedIn" : "profile"}</em>` : "";
+          ? `<br><em>click → ${node.url.includes("/search/") ? "find on LinkedIn" : "profile"}</em>`
+          : node.org && node.org.url
+            ? `<br><em>click → certificate</em>` : "";
       tip.innerHTML = `<strong>${node.label}</strong><span class="t-meta">${node.role || ""}${hint}</span>`;
       tip.style.opacity = 1;
       let x = e.clientX + 14, y = e.clientY + 14;
