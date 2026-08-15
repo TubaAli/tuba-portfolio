@@ -135,4 +135,26 @@
     col.appendChild(ul);
     lists.appendChild(col);
   });
+
+  /* ---- profile sections (data in data.js) ---- */
+  function renderRows(id, items, map) {
+    const host = document.getElementById(id);
+    if (!host || !items) return;
+    items.forEach(it => {
+      const { when, title, org, note } = map(it);
+      const div = document.createElement("div");
+      div.className = "row-item";
+      div.innerHTML =
+        `<div class="when">${when || ""}</div>
+         <div class="what"><strong>${title}</strong><span class="org">${org || ""}</span>
+           ${note ? `<div class="note">${note}</div>` : ""}</div>`;
+      host.appendChild(div);
+    });
+  }
+  renderRows("experienceRows", typeof EXPERIENCE !== "undefined" && EXPERIENCE,
+    e => ({ when: e.period, title: e.role, org: "· " + e.org, note: e.note }));
+  renderRows("certRows", typeof CERTIFICATIONS !== "undefined" && CERTIFICATIONS,
+    c => ({ when: c.year, title: c.name, org: "· " + c.org }));
+  renderRows("volunteerRows", typeof VOLUNTEERING !== "undefined" && VOLUNTEERING,
+    v => ({ when: v.period, title: v.role, org: "· " + v.org, note: v.note }));
 })();
