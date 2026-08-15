@@ -102,6 +102,7 @@ const CATEGORIES = {
   advisory:    { label: "Advisory",     light: "#008300", dark: "#008300" },
   fellowship:  { label: "Fellowship",   light: "#4a3aa7", dark: "#9085e9" },
   recognition: { label: "Recognition",  light: "#e34948", dark: "#e66767" },
+  mentors:     { label: "Mentors & Friends", light: "#e87ba4", dark: "#d55181" },
 };
 
 /* Organizations are the main view. Click an org node to reveal its people.
@@ -141,6 +142,7 @@ const ORGS = [
     ] },
   { name: "SDS · Chiba Institute of Technology", role: "Master's in Design and Science, 2026–", cat: "education",
     people: [
+      { name: "Joichi Ito",             role: "President, Chiba Institute of Technology · Co-Founder, Digital Garage · ex-Director, MIT Media Lab", url: "https://jp.linkedin.com/in/joiito" },
       { name: "Mizuki Oka",             role: "Engineer of Artificial Life" },
       { name: "Catharina Maracke",      role: "Legal Scholar of Digital Governance" },
       { name: "Daum Kim",               role: "Designer of Digital Culture" },
@@ -226,6 +228,21 @@ const ORGS = [
   { name: "Smart India Hackathon", role: "Winner 2019 — Rog Alert", cat: "recognition", people: [] },
   /* add url: "assets/hpair-certificate.pdf" once the certificate file is in assets/ */
   { name: "Harvard Project for Asian and International Relations (HPAIR)", role: "Delegate 2018", cat: "recognition", people: [] },
+  { name: "Mentors & Friends", role: "People who shaped my journey", cat: "mentors",
+    people: [
+      { name: "Santanu Bhattacharya", role: "Chief Technologist, NatWest · Visiting Professor, IISc · Co-Founder, S20.AI", url: "https://www.linkedin.com/in/santanub/" },
+      { name: "Annie Chang",     role: "Founder / President, Women in Technology Japan", url: "https://www.linkedin.com/in/anniechangwitj/" },
+      { name: "Sandeep Casi",    role: "Head of Ibex APAC · Partner at Antler · ex-Fujifilm, ex-Fuji Xerox" },
+      { name: "Kaori Rei",       role: "Building AI adoption programs across Tokyo, SF & NYC" },
+      { name: "Jigyasa Grover",  role: "ML @ Uber · Google Developer Advisory Board" },
+      { name: "Akshi Kumar",     role: "AI academic — online safety, digital trust & responsible AI" },
+      { name: "Lena Ryuji",      role: "Designs and drives Diversity, Equity & Inclusion programs" },
+      { name: "Jeff Heilman",    role: "Founder & operator — 7 exits, $5B in market cap" },
+      { name: "Nidhi Sharma",    role: "Computer Scientist, Adobe", url: "https://www.linkedin.com/in/nidhi1997/" },
+      { name: "Aarushi Gupta",   role: "Machine Learning Engineer, Adobe", url: "https://www.linkedin.com/in/aarushi-gupta-10251401/" },
+      { name: "Pavana Gupta",    role: "Senior Associate, Boston Consulting Group", url: "https://www.linkedin.com/in/pavana-gupta/" },
+      { name: "Mansi Khemka",    role: "Software Engineer II, Microsoft", url: "https://www.linkedin.com/in/mansi-khemka/" },
+    ] },
 ];
 
 /* ---------- PROFILE SECTIONS (rendered on the compass page) ---------- */
