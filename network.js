@@ -30,37 +30,6 @@
 
   let nodes = [], links = [], raf = null, alpha = 0;
 
-  /* ===== TEMPORARY: double-click-to-delete for JITTN people =====
-     Single click opens the profile; double click removes the person
-     (saved in this browser's localStorage so it survives reloads).
-     Delete this whole block + the `removable` references to disable. */
-  const JITTN_KEY = "jittn-removed";
-  const isJittn = o => o.name.indexOf("JITTN") === 0;
-  const jittnRemoved = () => JSON.parse(localStorage.getItem(JITTN_KEY) || "[]");
-  ORGS.filter(isJittn).forEach(o => {
-    const gone = new Set(jittnRemoved());
-    o.people = o.people.filter(p => !gone.has(p.name));
-  });
-  function renderRemovedNote() {
-    let note = document.getElementById("removedNote");
-    const names = jittnRemoved();
-    if (!note) {
-      note = document.createElement("p");
-      note.id = "removedNote";
-      note.className = "section-note";
-      note.style.marginTop = "10px";
-      svg.closest(".graph-card").after(note);
-    }
-    if (!names.length) { note.remove(); return; }
-    note.innerHTML = `<strong>Removed from JITTN</strong> (this browser only — tell Claude these names to delete permanently): ${names.join(", ")} · <a href="#" id="restoreJittn">restore all</a>`;
-    note.querySelector("#restoreJittn").addEventListener("click", e => {
-      e.preventDefault();
-      localStorage.removeItem(JITTN_KEY);
-      location.reload();
-    });
-  }
-  /* ===== end TEMPORARY block ===== */
-
   function rebuild() {
     nodes = [center, ...orgNodes];
     links = orgNodes.map(o => ({ s: center, t: o, len: 235 }));
@@ -78,8 +47,7 @@
             : ((j % perRing) / inRing) * Math.PI * 2 + ring * 0.26;
           return {
             id: o.id + "p" + j, label: p.name, role: p.role + " — " + o.org.name, cat: o.cat,
-            r: 8, person: true, radius, parentOrg: o,
-            removable: isJittn(o.org), /* TEMPORARY */
+            r: 8, person: true, radius,
             url: p.url || "https://www.linkedin.com/search/results/all/?keywords=" + encodeURIComponent(p.name),
             x: o.x + Math.cos(a) * radius, y: o.y + Math.sin(a) * radius, vx: 0, vy: 0,
           };
@@ -166,31 +134,10 @@
       }
       if (node.person && node.url) {
         g.style.cursor = "pointer";
-        if (!node.removable) {
-          g.addEventListener("click", () => {
-            if (g.__dragged) return;
-            window.open(node.url, "_blank", "noopener");
-          });
-        } else {
-          /* TEMPORARY: single click (delayed) opens; double click deletes */
-          let clickTimer = null;
-          g.addEventListener("click", () => {
-            if (g.__dragged) return;
-            clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => window.open(node.url, "_blank", "noopener"), 300);
-          });
-          g.addEventListener("dblclick", () => {
-            clearTimeout(clickTimer);
-            const names = jittnRemoved();
-            names.push(node.label);
-            localStorage.setItem(JITTN_KEY, JSON.stringify(names));
-            const po = node.parentOrg;
-            po.org.people = po.org.people.filter(p => p.name !== node.label);
-            personNodes.delete(po.id);
-            rebuild();
-            renderRemovedNote();
-          });
-        }
+        g.addEventListener("click", () => {
+          if (g.__dragged) return;
+          window.open(node.url, "_blank", "noopener");
+        });
       }
       return g;
     });
@@ -282,7 +229,7 @@
       const hint = node.expandable && !node.person
         ? `<br><em>${node.expanded ? "click to hide people" : "click to see people"}</em>`
         : node.person && node.url
-          ? `<br><em>click → ${node.url.includes("/search/") ? "find on LinkedIn" : "profile"}${node.removable ? " · double-click → remove" : ""}</em>`
+          ? `<br><em>click → ${node.url.includes("/search/") ? "find on LinkedIn" : "profile"}</em>`
           : node.org && node.org.url
             ? `<br><em>click → certificate</em>` : "";
       tip.innerHTML = `<strong>${node.label}</strong><span class="t-meta">${node.role || ""}${hint}</span>`;
@@ -302,5 +249,4 @@
     if (o.expandable && o.label.toLowerCase().includes(exp.toLowerCase())) o.expanded = true;
   });
   rebuild();
-  renderRemovedNote(); /* TEMPORARY */
 })();

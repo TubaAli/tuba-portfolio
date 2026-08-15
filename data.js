@@ -227,3 +227,39 @@ const ORGS = [
   /* add url: "assets/hpair-certificate.pdf" once the certificate file is in assets/ */
   { name: "Harvard Project for Asian and International Relations (HPAIR)", role: "Delegate 2018", cat: "recognition", people: [] },
 ];
+
+/* ---------- PROFILE SECTIONS (rendered on the compass page) ---------- */
+const EXPERIENCE = [
+  { role: "Senior Product Manager, Frontend Product Group", org: "Rakuten Payment, Inc.", period: "2024 – Present",
+    note: "FinTech One App unifying 6 financial services on a 50M+ user platform; leading an LLM-based customer-support AI agent from POC to executive buy-in; shipped an internal RAG documentation chatbot used by ~300 employees." },
+  { role: "Product Manager, Cross-Service Group", org: "Rakuten Payment, Inc.", period: "2023 – 2024",
+    note: "B2B widgets platform (+10% click-rate, −50% partner person-hours); Rakuten Pay Web SDK for external partner apps." },
+  { role: "Product Manager & Social Platform Lead, Core Engineering", org: "Fast Retailing (Uniqlo)", period: "2021 – 2022",
+    note: "Conversational customer channel on LINE across Uniqlo's 40M-user base — reach, retention, and repeat purchase." },
+  { role: "Associate Product Manager, Core Engineering", org: "Fast Retailing (Uniqlo)", period: "2020 – 2021",
+    note: "Authentication and system-risk detection across 10+ microservice teams; centralized credential audit from zero." },
+  { role: "Associate IT Strategist, Office of the CTO", org: "Fast Retailing (Uniqlo)", period: "2019 – 2020",
+    note: "Uniqlo India launch from Japan — 30K MAUs in year one; AR/3D retail pilots with 10+ startups." },
+];
+
+const CERTIFICATIONS = [
+  { name: "System Thinking — Professional Certificate (2.25 CEUs)", org: "MIT Professional Education", year: "2024" },
+  { name: "JLPT N2 — business-level Japanese", org: "Japanese-Language Proficiency Test", year: "" },
+  { name: "IELTS Academic — Overall Band 8.0", org: "British Council", year: "2023" },
+  { name: "Blockchain: Beyond the Basics (2.8 CPE, NASBA)", org: "LinkedIn Learning", year: "2022" },
+  { name: "GirlScript Summer of Code — Certificate of Recognition", org: "GirlScript Foundation", year: "2018" },
+  { name: "Virtual Mentorship Program for Women in Technology — Mentee", org: "WooTech", year: "2018" },
+];
+
+const VOLUNTEERING = [
+  { role: "Technology & Strategy Consultant", org: "Women in Technology Japan", period: "2022 – Present",
+    note: "900+ member community; lectures at 4 Japanese universities and 20+ Tokyo companies; 10+ mentees." },
+  { role: "AI Hackathon Judge & Mentor", org: "Japan's AI community", period: "2023 – Present",
+    note: "Judge at 3 AI hackathons, mentor at 2; active in AI safety workshops and Rakuten's AI conference." },
+  { role: "Coach", org: "Japan Venture Academy", period: "2023",
+    note: "Mentored 15 students on product frameworks, design thinking, customer empathy, and A/B testing." },
+  { role: "Initiator, VISTORA · Project Lead, Live-Tech Highway", org: "JITTN — Nippon Foundation · Salzburg Global", period: "2025 – Present",
+    note: "AI sign-language translation for children under 6; Japan–India bilateral technology platform." },
+  { role: "Volunteer Teacher — 'Teach for India' campaign", org: "NSS-DTU · Youth for Seva", period: "2016",
+    note: "Recognized for distinguished service teaching underserved students (Apr–Aug 2016)." },
+];
