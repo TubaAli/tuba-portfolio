@@ -293,7 +293,8 @@ const SPRINT = {
       insight: "The reports were never going to standardize — five companies won't change their formats for one owner. So the tool had to absorb the mess instead: import anything, map columns once, remember the mapping. And because this is someone's complete business finances, it became a local desktop app — SQLite on the owner's own machine, nothing sent to any cloud, AI strictly optional.",
       solution: "PropertyPulse — a desktop app (Mac & Windows, double-click install, nothing else to set up). Drag in any report: Airbnb CSVs are auto-detected and revenue prorated per night of stay; everything else gets a column-mapping screen with saved mappings and optional AI suggestions. Out comes one executive summary — 売上, occupancy, ADR, RevPAR with day / month / year-over-year comparisons, channel mix, property rankings, and properties that need attention — plus a ready-to-import CSV for freee or マネーフォワード, so the accountant's re-typing disappears too.",
       ship: ["Tauri 2 desktop app", "React + TypeScript", "SQLite — local only, no cloud", "Airbnb CSV auto-detect", "Excel / PDF import + column mapping", "Shift_JIS auto-detect", "freee & マネーフォワード export", "Mac + Windows installers"],
-      links: [{ label: "github.com/ReadingNought/property-dashboard", url: "https://github.com/ReadingNought/property-dashboard" }] },
+      links: [{ label: "▶ dashboard showcase — readingnought.github.io/solutions-portfolio", url: "https://readingnought.github.io/solutions-portfolio/" },
+              { label: "github.com/ReadingNought/property-dashboard", url: "https://github.com/ReadingNought/property-dashboard" }] },
 
     { n: 3, status: "live", slug: "ai-collaborator", page: "ai-collaborator.html", icon: "芽",
       title: "Olo — the AI collaborator",
@@ -316,7 +317,8 @@ const SPRINT = {
       insight: "An alert you can't act on is noise. RentPulse raises a renewal alert only inside the 7-to-6-month window — if it's already too late to notify, it stays silent. And the AI proposes but never decides: every market estimate ships with sources and linked comparable listings, and a legal eligibility checklist (借地借家法 §32 and friends) stands between every alert and every letter.",
       solution: "A dashboard that sweeps the whole portfolio every morning at 6:00 JST and surfaces exactly two kinds of alerts: renewal windows opening, and rents that drifted below an AI-researched market range by your chosen threshold — units hit by both are ★ top priority. Click one: market range, proposed rent, comparable listings with real links. Pass the eligibility check, and it generates the formal 賃料改定のお知らせ notice PDF with the six-month deadline validated. Onboarding is drag-and-drop too: マイソク and lease PDFs are auto-extracted into property records.",
       ship: ["Next.js 16 + TypeScript", "SQLite", "node-cron — 6:00 JST daily sweep", "LLM web search — Claude / OpenAI / Gemini", "マイソク・契約書 PDF extraction", "pdf-lib + Noto Sans JP notices", "日英 UI toggle", "CSV export — UTF-8 / Shift_JIS"],
-      links: [{ label: "client build — repo private" }] },
+      links: [{ label: "▶ live dashboard — rentpulse.onrender.com (demo data; free tier, give it a minute to wake)", url: "https://rentpulse.onrender.com/" },
+              { label: "client build — repo private" }] },
 
     { n: 5, status: "live", slug: "lp-scout", page: "lp-scout.html", icon: "縁",
       title: "LP Scout — fifteen seconds at dinner",
@@ -327,7 +329,8 @@ const SPRINT = {
       insight: "The honest call was about friction and blast radius. Logging had to happen where the team already lives (Discord) and take about fifteen seconds — dropdowns, almost no typing — or it simply wouldn't happen. And a scrappy dinner-table tool must not touch the fund's official systems: deliberately separate, its own database, zero API calls anywhere else. When a prospect actually becomes an LP, a human moves them over.",
       solution: "A Discord slash command, /lp: pick who, where you met, how warm, who knows them — logged before the next dish arrives. Everything lands in one dashboard: a table for the Monday review, and a network graph of who-knows-whom, so “who can reintroduce us?” is a glance instead of a meeting. One Python process runs the entire thing — Discord bot, API, and dashboard — on one small box with SQLite underneath. If the bot ever crashes, the dashboard keeps running.",
       ship: ["FastAPI + uvicorn", "discord.py slash commands", "SQLite — WAL mode", "vanilla JS dashboard — no build step", "vis-network who-knows-whom graph", "one process · zero external services"],
-      links: [{ label: "client build — repo private" }] },
+      links: [{ label: "▶ team guide — tubaali.github.io/lp-scout-guide", url: "https://tubaali.github.io/lp-scout-guide/" },
+              { label: "client build — repo private" }] },
   ],
 };
 
