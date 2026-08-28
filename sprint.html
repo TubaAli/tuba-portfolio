@@ -25,6 +25,7 @@
     I run free one-week AI sprints for small businesses in Japan:
     consult → build → collect real feedback → improve → ≥95% satisfaction in a survey.
     Ten businesses is the first target — once it's done, I raise the bar.
+    Each finished sprint gets its own page with the full story and a demo you can play with.
     The challenge lives at
     <a href="https://tubaali.github.io/ai-sprint/" target="_blank" rel="noopener">tubaali.github.io/ai-sprint</a>.
   </p>
@@ -33,7 +34,7 @@
   <div class="lantern-card">
     <div class="lantern-head">
       <span class="lantern-count" id="lanternCount"></span>
-      <span class="lantern-sub">Each lantern is one business. Tap a lit one.</span>
+      <span class="lantern-sub">Each lantern is one business. A lit one opens its story.</span>
     </div>
     <div class="lanterns" id="lanterns"></div>
     <p class="lantern-msg" id="lanternMsg">&nbsp;</p>
@@ -50,47 +51,9 @@
     <svg id="loopSvg" viewBox="0 0 900 172" role="img" aria-label="Sprint loop: consult, build, real feedback, improve, 95 percent satisfaction — repeat until reached"></svg>
   </div>
 
-  <!-- case 01: izakaya -->
-  <h2 class="page-h2">Case 01 — The Izakaya menu</h2>
-  <div class="case-story" id="caseStory"></div>
-
-  <div class="izakaya">
-    <div class="iz-header">
-      <span class="noren">囲</span>
-      <div>
-        <strong>Try their new menu yourself</strong>
-        <span class="iz-sub">Drag a sticker from the tray onto today's catch — click a placed sticker to peel it off. This is the whole solution: no app, no AI, no rewriting.</span>
-      </div>
-    </div>
-
-    <div class="iz-board">
-      <div class="menu-col static-col">
-        <h5><span class="tag tag-static">STATIC</span> おしながき — laminated once, forever</h5>
-        <ul id="staticMenu"></ul>
-        <p class="menu-note">Large, machine-readable font — tourists photo-translate it with their phones.</p>
-      </div>
-
-      <div class="menu-col dynamic-col">
-        <h5><span class="tag tag-dyn">DYNAMIC</span> 本日の鮮魚 — today's catch</h5>
-        <ul id="dynamicMenu"></ul>
-        <p class="menu-note" id="dayNote"></p>
-      </div>
-
-      <div class="tray">
-        <h5>Sticker tray</h5>
-        <div class="tray-stickers" id="tray"></div>
-        <button class="day-btn" id="newDay">☀ Next morning — new catch</button>
-        <button class="day-btn ghost-btn" id="oldWorld">See their old morning</button>
-        <div class="old-world" id="oldWorldPanel" hidden>
-          <p><strong>Before, every single day:</strong> ✍️ hand-write the menu → 🖨️ print it → 📄 laminate it → 🗑️ throw it away at close. <strong>Now:</strong> peel a sticker. ~10 seconds.</p>
-        </div>
-      </div>
-    </div>
-    <p class="iz-caption" id="izCaption">&nbsp;</p>
-  </div>
-
-  <!-- other cases -->
-  <h2 class="page-h2">The other sprints</h2>
+  <!-- the cases -->
+  <h2 class="page-h2">The five stories so far — every one playable</h2>
+  <p class="section-note">An izakaya, an Airbnb owner, my own research team, a property manager, a venture fund. Different pains, one loop — and twice, the honest answer had almost no AI in it.</p>
   <div class="case-grid" id="caseGrid"></div>
 </main>
 
