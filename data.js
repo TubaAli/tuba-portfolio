@@ -250,10 +250,11 @@ const ORGS = [
     ] },
 ];
 
-/* ---------- AI SPRINT (rendered on sprint.html) ----------
+/* ---------- AI SPRINT (rendered on sprint.html + one page per case) ----------
    done: how many of the 10 sprints are complete — update this number
-   as sprints finish. Cases with status "live" get a full story +
-   interactive demo section; "soon" shows a locked teaser card.       */
+   as sprints finish. Cases with status "live" have their own page
+   (slug.html) with a full story + playable demo; slots above `done`
+   render as open-slot cards linking to the sprint site.              */
 const SPRINT = {
   site: "https://tubaali.github.io/ai-sprint/",
   total: 10,
@@ -272,15 +273,61 @@ const SPRINT = {
   /* the loop shown in the process diagram */
   loop: ["Consult", "Build", "Real feedback", "Improve", "≥95% satisfaction"],
   cases: [
-    { n: 1, status: "live", title: "The Izakaya menu",
+    { n: 1, status: "live", slug: "izakaya", page: "izakaya.html", icon: "囲",
+      title: "The Izakaya menu",
+      tagline: "Sprint 01 — a menu that updates in ten seconds, no AI required",
+      oneliner: "A daily hand-written, printed, laminated menu became a 10-second peel-and-stick system. The honest solution had no AI in it.",
       biz: "A 2-person izakaya in Tokyo — a couple in their late 80s, famous for fresh fish",
       pain: "Their menu is dynamic by design: they buy whatever fish is freshest that morning, and if the right catch isn't there, the menu changes. So every single day they hand-wrote the menu, printed it, and laminated it. For two owners in their late 80s, that daily loop was the heaviest task in the shop.",
       insight: "This one didn't need AI — and saying so is the point. The right solution had to match the owners' technical fluency, not our tech stack.",
-      solution: "We split every menu into two parts. STATIC — written once, laminated once, forever: set in a large, easy-to-read Japanese font (foreign guests photo-translate the menu with apps, so machine-readability was a design requirement). DYNAMIC — the daily catch on its own laminated sheet, plus custom stickers: 「売り切れ」 (sold out), 「本日なし」 (not today), and dish-photo stickers to cover items. Now a menu update is a 10-second peel-and-stick, not a morning of rewriting." },
-    { n: 2, status: "soon", title: "Case 02" },
-    { n: 3, status: "soon", title: "Case 03" },
-    { n: 4, status: "soon", title: "Case 04" },
-    { n: 5, status: "soon", title: "Case 05" },
+      solution: "We split every menu into two parts. STATIC — written once, laminated once, forever: set in a large, easy-to-read Japanese font (foreign guests photo-translate the menu with apps, so machine-readability was a design requirement). DYNAMIC — the daily catch on its own laminated sheet, plus custom stickers: 「売り切れ」 (sold out), 「本日なし」 (not today), and dish-photo stickers to cover items. Now a menu update is a 10-second peel-and-stick, not a morning of rewriting.",
+      ship: ["two-part menu system", "laminate once, forever", "machine-readable typography", "custom 売り切れ・本日なし stickers", "¥0 running cost", "no app · no login · no AI"],
+      links: [] },
+
+    { n: 2, status: "live", slug: "property-pulse", page: "property-pulse.html", icon: "宿",
+      title: "PropertyPulse — every property, one truth",
+      tagline: "Sprint 02 — three report formats, one dashboard, zero cloud",
+      oneliner: "An Airbnb owner drowning in mismatched reports from every property got one local desktop dashboard — and an accountant-ready CSV.",
+      biz: "An Airbnb owner in Japan running several guesthouse and hotel properties — each reporting through a different management company, in a different format",
+      pain: "Every property spoke its own language: Airbnb transaction CSVs in English, management-company monthly reports as PDFs, daily booking exports in Excel — different columns, different encodings (hello, Shift_JIS), different definitions of “revenue.” Answering “how is the business actually doing?” meant a weekend of copy-paste every month, and the accountant still re-typed everything into 会計ソフト by hand.",
+      insight: "The reports were never going to standardize — five companies won't change their formats for one owner. So the tool had to absorb the mess instead: import anything, map columns once, remember the mapping. And because this is someone's complete business finances, it became a local desktop app — SQLite on the owner's own machine, nothing sent to any cloud, AI strictly optional.",
+      solution: "PropertyPulse — a desktop app (Mac & Windows, double-click install, nothing else to set up). Drag in any report: Airbnb CSVs are auto-detected and revenue prorated per night of stay; everything else gets a column-mapping screen with saved mappings and optional AI suggestions. Out comes one executive summary — 売上, occupancy, ADR, RevPAR with day / month / year-over-year comparisons, channel mix, property rankings, and properties that need attention — plus a ready-to-import CSV for freee or マネーフォワード, so the accountant's re-typing disappears too.",
+      ship: ["Tauri 2 desktop app", "React + TypeScript", "SQLite — local only, no cloud", "Airbnb CSV auto-detect", "Excel / PDF import + column mapping", "Shift_JIS auto-detect", "freee & マネーフォワード export", "Mac + Windows installers"],
+      links: [{ label: "github.com/ReadingNought/property-dashboard", url: "https://github.com/ReadingNought/property-dashboard" }] },
+
+    { n: 3, status: "live", slug: "ai-collaborator", page: "ai-collaborator.html", icon: "芽",
+      title: "Olo — the AI collaborator",
+      tagline: "Sprint 03 — an agent that drafts, remembers, and never decides",
+      oneliner: "For my own research team at SDS: a pair of personal agents and a shared source-of-truth repo took us from weekly-meeting cadence to daily threads.",
+      biz: "My own research team at SDS — me in Tokyo, my professor, and an LLM-evaluation study running between us. Sprint 03 turned the method on ourselves",
+      pain: "Research between two busy people dies in the gaps: operations tasks pile up, Slack replies wait for the weekly meeting, and “what did we actually agree?” drifts across threads, memories, and session logs. The bottleneck was never intelligence — it was communication frequency, and the absence of a shared source of truth.",
+      insight: "Don't build an agent that does the research — build one that keeps the humans in sync. And never let it speak for me unsupervised: Olo drafts; Tuba sends. Agreements don't live in chat at all — they live in a repo that only humans can promote decisions into.",
+      solution: "A pair of personal agents — Olo 🌱 (mine) and AIJoe 🤖 (my professor's) — around a shared “outline” repo that is the project's single source of truth: GOALS, CONSTRAINTS, METHODS, DECISIONS, UNAGREED, TRACKING. Olo reads a thread, drafts a reply in my voice (VOICE.md, extracted from my real messages) and posts it as a Slack draft for my approval. Anything that would change an agreement is filed to UNAGREED.md and becomes a DECISION only after every member 👍s the same resolution. Agents propose and remind — humans decide.",
+      ship: ["Claude Code agents", "Slack drafts — never auto-send", "PERSONA.md — five-element persona", "VOICE.md — my style, from real messages", "outline repo — 6 agreement files", "👍 human-only promotion protocol"],
+      links: [{ label: "tuba-sds/olo (private)", url: "https://github.com/tuba-sds/olo" },
+              { label: "tuba-sds/research-project-outline (private)", url: "https://github.com/tuba-sds/research-project-outline" }] },
+
+    { n: 4, status: "live", slug: "rent-pulse", page: "rent-pulse.html", icon: "賃",
+      title: "RentPulse — the 6 a.m. rent check",
+      tagline: "Sprint 04 — the rent check that runs before the office wakes up",
+      oneliner: "A property-management company with thousands of leases gets a morning list of exactly the units worth a phone call — and a legally-checked notice PDF.",
+      biz: "A property-management company responsible for thousands of leases — with renewal deadlines and market drift hiding inside every one of them",
+      pain: "Japanese lease law gives you one shot: to raise rent at renewal, the tenant must be notified six months ahead. Across thousands of contracts, the window between “worth acting on” and “legally too late” slips past unnoticed — and nobody has time to check every unit's rent against the market by hand. Under-market units quietly stay under-market for years.",
+      insight: "An alert you can't act on is noise. RentPulse raises a renewal alert only inside the 7-to-6-month window — if it's already too late to notify, it stays silent. And the AI proposes but never decides: every market estimate ships with sources and linked comparable listings, and a legal eligibility checklist (借地借家法 §32 and friends) stands between every alert and every letter.",
+      solution: "A dashboard that sweeps the whole portfolio every morning at 6:00 JST and surfaces exactly two kinds of alerts: renewal windows opening, and rents that drifted below an AI-researched market range by your chosen threshold — units hit by both are ★ top priority. Click one: market range, proposed rent, comparable listings with real links. Pass the eligibility check, and it generates the formal 賃料改定のお知らせ notice PDF with the six-month deadline validated. Onboarding is drag-and-drop too: マイソク and lease PDFs are auto-extracted into property records.",
+      ship: ["Next.js 16 + TypeScript", "SQLite", "node-cron — 6:00 JST daily sweep", "LLM web search — Claude / OpenAI / Gemini", "マイソク・契約書 PDF extraction", "pdf-lib + Noto Sans JP notices", "日英 UI toggle", "CSV export — UTF-8 / Shift_JIS"],
+      links: [{ label: "client build — repo private" }] },
+
+    { n: 5, status: "live", slug: "lp-scout", page: "lp-scout.html", icon: "縁",
+      title: "LP Scout — fifteen seconds at dinner",
+      tagline: "Sprint 05 — log a future investor before the next dish arrives",
+      oneliner: "A venture fund team meeting potential LPs at dinners logs them from Discord in ~15 seconds — and sees who-knows-whom as a live network graph.",
+      biz: "A Tokyo venture fund team raising a fund — meeting potential LPs at dinners and conferences, then losing them in pockets: phone notes, memory, nowhere",
+      pain: "The moment you meet a potential LP is the moment the data exists — who they are, who introduced you, how warm the conversation felt. By next morning it has evaporated. Nobody opens a CRM at an izakaya table, so prospects lived scattered across the team with no shared picture of who knew whom.",
+      insight: "The honest call was about friction and blast radius. Logging had to happen where the team already lives (Discord) and take about fifteen seconds — dropdowns, almost no typing — or it simply wouldn't happen. And a scrappy dinner-table tool must not touch the fund's official systems: deliberately separate, its own database, zero API calls anywhere else. When a prospect actually becomes an LP, a human moves them over.",
+      solution: "A Discord slash command, /lp: pick who, where you met, how warm, who knows them — logged before the next dish arrives. Everything lands in one dashboard: a table for the Monday review, and a network graph of who-knows-whom, so “who can reintroduce us?” is a glance instead of a meeting. One Python process runs the entire thing — Discord bot, API, and dashboard — on one small box with SQLite underneath. If the bot ever crashes, the dashboard keeps running.",
+      ship: ["FastAPI + uvicorn", "discord.py slash commands", "SQLite — WAL mode", "vanilla JS dashboard — no build step", "vis-network who-knows-whom graph", "one process · zero external services"],
+      links: [{ label: "client build — repo private" }] },
   ],
 };
 

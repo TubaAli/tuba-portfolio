@@ -1,6 +1,7 @@
-/* ============ AI SPRINT — lanterns, goals, loop, izakaya game ============ */
+/* ============ AI SPRINT HUB — lanterns, goals, loop, case index ============ */
 (function () {
   const $ = id => document.getElementById(id);
+  const live = n => SPRINT.cases.find(c => c.n === n && c.status === "live");
 
   /* ---------------- lanterns (progress) ---------------- */
   const host = $("lanterns");
@@ -9,10 +10,12 @@
     `${SPRINT.done} of ${SPRINT.total} businesses helped — then I raise the bar`;
 
   for (let i = 1; i <= SPRINT.total; i++) {
+    const c = live(i);
     const lit = i <= SPRINT.done;
-    const d = document.createElement("button");
+    const d = document.createElement(c ? "a" : "button");
     d.className = "lantern" + (lit ? " lit" : "");
-    d.setAttribute("aria-label", lit ? `Sprint ${i} — complete` : `Sprint ${i} — open slot`);
+    if (c) { d.href = c.page; d.title = c.title; }
+    d.setAttribute("aria-label", c ? `Sprint ${i} — ${c.title}` : lit ? `Sprint ${i} — complete` : `Sprint ${i} — open slot`);
     d.innerHTML =
       `<svg viewBox="0 0 44 64" aria-hidden="true">
          <rect x="14" y="2" width="16" height="6" rx="2" class="ln-cap"/>
@@ -21,18 +24,15 @@
          <rect x="14" y="56" width="16" height="6" rx="2" class="ln-cap"/>
          <text x="22" y="38" text-anchor="middle" class="ln-txt">${i}</text>
        </svg>`;
-    d.addEventListener("click", () => {
-      document.querySelectorAll(".lantern").forEach(n => n.classList.remove("sel"));
-      d.classList.add("sel");
-      if (i === 1) {
-        msg.textContent = "Sprint 01 — the izakaya menu. Story and playable demo below ↓";
-        document.querySelector(".izakaya").scrollIntoView({ behavior: "smooth", block: "start" });
-      } else if (lit) {
-        msg.textContent = `Sprint 0${i} — complete. Story coming soon; I write them up one at a time.`;
-      } else {
+    if (c) {
+      d.addEventListener("mouseenter", () => { msg.textContent = `Sprint 0${i} — ${c.title}. ${c.oneliner}`; });
+    } else {
+      d.addEventListener("click", () => {
+        document.querySelectorAll(".lantern").forEach(n => n.classList.remove("sel"));
+        d.classList.add("sel");
         msg.innerHTML = `Sprint ${i < 10 ? "0" + i : i} — open slot. Know a small business drowning in one task? <a href="${SPRINT.site}" target="_blank" rel="noopener">Send them here →</a>`;
-      }
-    });
+      });
+    }
     host.appendChild(d);
   }
 
@@ -84,129 +84,14 @@
     back.textContent = "below 95%? go around again";
   })();
 
-  /* ---------------- case 01 story ---------------- */
-  const c1 = SPRINT.cases.find(c => c.status === "live");
-  $("caseStory").innerHTML =
-    `<div class="story-block"><span class="story-k">The business</span><p>${c1.biz}.</p></div>
-     <div class="story-block"><span class="story-k">The pain</span><p>${c1.pain}</p></div>
-     <div class="story-block insight"><span class="story-k">The honest call</span><p>${c1.insight}</p></div>
-     <div class="story-block"><span class="story-k">The solution</span><p>${c1.solution}</p></div>`;
-
-  /* ---------------- izakaya game ---------------- */
-  const STICKERS = [
-    { type: "sold",    jp: "売り切れ", en: "SOLD OUT" },
-    { type: "notoday", jp: "本日なし", en: "not today" },
-    { type: "photo",   jp: "🐟",       en: "dish photo" },
-  ];
-  const DYN_COUNT = 5;
-  let dayNo = 1;
-
-  const staticUl = $("staticMenu");
-  SPRINT_STATIC.forEach(it => {
-    const li = document.createElement("li");
-    li.className = "menu-item";
-    li.innerHTML = `<span class="mi-jp">${it.jp}</span><span class="mi-en">${it.en}</span><span class="mi-price">${it.price}</span>`;
-    staticUl.appendChild(li);
-  });
-
-  const dynUl = $("dynamicMenu");
-  const caption = $("izCaption");
-
-  function todaysCatch() {
-    const pool = SPRINT_FISH.slice();
-    for (let i = pool.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
-    }
-    return pool.slice(0, DYN_COUNT);
-  }
-
-  function renderDay() {
-    dynUl.innerHTML = "";
-    todaysCatch().forEach(it => {
-      const li = document.createElement("li");
-      li.className = "menu-item dyn-item";
-      li.innerHTML = `<span class="mi-jp">${it.jp}</span><span class="mi-en">${it.en}</span><span class="mi-price">${it.price}</span>`;
-      dynUl.appendChild(li);
-    });
-    $("dayNote").textContent = `Day ${dayNo} — whatever was freshest at the market this morning.`;
-    caption.innerHTML = "&nbsp;";
-  }
-
-  function coveredCount() {
-    return dynUl.querySelectorAll(".sticker.applied").length;
-  }
-  function updateCaption() {
-    const n = coveredCount();
-    if (n === 0) caption.innerHTML = "&nbsp;";
-    else if (n < DYN_COUNT) caption.textContent = `${n} item${n > 1 ? "s" : ""} updated in seconds — nothing rewritten, nothing reprinted.`;
-    else caption.textContent = "閉店ガラガラ — everything's gone! In the old world, tomorrow meant rewriting the whole menu. Now: peel the stickers off.";
-  }
-
-  /* tray */
-  const tray = $("tray");
-  STICKERS.forEach(s => {
-    const d = document.createElement("div");
-    d.className = `sticker st-${s.type}`;
-    d.dataset.type = s.type;
-    d.innerHTML = `<b>${s.jp}</b><i>${s.en}</i>`;
-    tray.appendChild(d);
-  });
-
-  /* drag: pointer events, works for touch + mouse */
-  let ghost = null, ghostType = null;
-  tray.addEventListener("pointerdown", e => {
-    const src = e.target.closest(".sticker");
-    if (!src) return;
-    e.preventDefault();
-    ghostType = src.dataset.type;
-    ghost = src.cloneNode(true);
-    ghost.classList.add("dragging");
-    document.body.appendChild(ghost);
-    moveGhost(e);
-  });
-  function moveGhost(e) {
-    if (!ghost) return;
-    ghost.style.left = e.clientX + "px";
-    ghost.style.top = e.clientY + "px";
-  }
-  window.addEventListener("pointermove", e => { if (ghost) { e.preventDefault(); moveGhost(e); } }, { passive: false });
-  window.addEventListener("pointerup", e => {
-    if (!ghost) return;
-    ghost.style.display = "none";
-    const under = document.elementFromPoint(e.clientX, e.clientY);
-    const item = under && under.closest(".dyn-item");
-    ghost.remove(); ghost = null;
-    if (item && !item.querySelector(".sticker.applied")) {
-      const s = STICKERS.find(x => x.type === ghostType);
-      const applied = document.createElement("button");
-      applied.className = `sticker applied st-${s.type}`;
-      applied.title = "click to peel off";
-      applied.style.setProperty("--rot", (Math.random() * 10 - 5).toFixed(1) + "deg");
-      applied.innerHTML = `<b>${s.jp}</b><i>${s.en}</i>`;
-      applied.addEventListener("click", () => { applied.remove(); updateCaption(); });
-      item.appendChild(applied);
-      updateCaption();
-    }
-    ghostType = null;
-  });
-
-  $("newDay").addEventListener("click", () => { dayNo++; renderDay(); });
-  $("oldWorld").addEventListener("click", () => {
-    const p = $("oldWorldPanel");
-    p.hidden = !p.hidden;
-    $("oldWorld").textContent = p.hidden ? "See their old morning" : "Hide the old morning";
-  });
-
-  renderDay();
-
-  /* ---------------- other cases grid ---------------- */
+  /* ---------------- case index ---------------- */
   const grid = $("caseGrid");
-  SPRINT.cases.filter(c => c.status === "soon").forEach(c => {
-    const d = document.createElement("div");
-    d.className = "case-card soon";
-    d.innerHTML = `<span class="cc-n">0${c.n}</span><strong>Sprint complete</strong><span>story coming soon</span>`;
-    grid.appendChild(d);
+  SPRINT.cases.filter(c => c.status === "live").forEach(c => {
+    const a = document.createElement("a");
+    a.className = "case-card open";
+    a.href = c.page;
+    a.innerHTML = `<span class="cc-n">0${c.n} · ${c.icon}</span><strong>${c.title}</strong><span>${c.oneliner}</span><span class="cc-n" style="margin-top:6px">play the demo →</span>`;
+    grid.appendChild(a);
   });
   for (let i = SPRINT.done + 1; i <= SPRINT.total; i++) {
     const a = document.createElement("a");

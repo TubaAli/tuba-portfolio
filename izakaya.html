@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuba Ali — Sprint 01 · The Izakaya menu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-case="izakaya">
+
+<header>
+  <div class="brand">
+    <h1>Tuba Ali</h1>
+    <p id="caseTagline"></p>
+  </div>
+  <nav>
+    <a href="index.html">Compass</a>
+    <a href="sprint.html" class="active">AI Sprint</a>
+    <a href="network.html">Network</a>
+  </nav>
+</header>
+
+<main>
+  <div class="case-hero" id="caseHero"></div>
+  <div class="case-pager" id="casePager"></div>
+  <div class="case-story" id="caseStory"></div>
+
+  <h2 class="page-h2">Try their new menu yourself</h2>
+  <div class="izakaya">
+    <div class="iz-header">
+      <span class="noren">囲</span>
+      <div>
+        <strong>The whole solution, playable</strong>
+        <span class="iz-sub">Drag a sticker from the tray onto today's catch — click a placed sticker to peel it off. No app, no AI, no rewriting.</span>
+      </div>
+    </div>
+
+    <div class="iz-board">
+      <div class="menu-col static-col">
+        <h5><span class="tag tag-static">STATIC</span> おしながき — laminated once, forever</h5>
+        <ul id="staticMenu"></ul>
+        <p class="menu-note">Large, machine-readable font — tourists photo-translate it with their phones.</p>
+      </div>
+
+      <div class="menu-col dynamic-col">
+        <h5><span class="tag tag-dyn">DYNAMIC</span> 本日の鮮魚 — today's catch</h5>
+        <ul id="dynamicMenu"></ul>
+        <p class="menu-note" id="dayNote"></p>
+      </div>
+
+      <div class="tray">
+        <h5>Sticker tray</h5>
+        <div class="tray-stickers" id="tray"></div>
+        <button class="day-btn" id="newDay">☀ Next morning — new catch</button>
+        <button class="day-btn ghost-btn" id="oldWorld">See their old morning</button>
+        <div class="old-world" id="oldWorldPanel" hidden>
+          <p><strong>Before, every single day:</strong> ✍️ hand-write the menu → 🖨️ print it → 📄 laminate it → 🗑️ throw it away at close. <strong>Now:</strong> peel a sticker. ~10 seconds.</p>
+        </div>
+      </div>
+    </div>
+    <p class="iz-caption" id="izCaption">&nbsp;</p>
+  </div>
+
+  <h2 class="page-h2">What shipped</h2>
+  <div class="ship-chips" id="shipChips"></div>
+  <p class="case-links" id="caseLinks"></p>
+
+  <div class="case-pager foot" id="casePagerFoot"></div>
+</main>
+
+<footer>AI Sprint — a free pilot for small businesses in Japan. If AI isn't the honest answer, I say so — this case is proof.</footer>
+
+<div id="tip"></div>
+<script src="data.js"></script>
+<script src="cases.js"></script>
+<script src="izakaya.js"></script>
+</body>
+</html>

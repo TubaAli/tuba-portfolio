@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuba Ali — Sprint 04 · RentPulse</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-case="rent-pulse">
+
+<header>
+  <div class="brand">
+    <h1>Tuba Ali</h1>
+    <p id="caseTagline"></p>
+  </div>
+  <nav>
+    <a href="index.html">Compass</a>
+    <a href="sprint.html" class="active">AI Sprint</a>
+    <a href="network.html">Network</a>
+  </nav>
+</header>
+
+<main>
+  <div class="case-hero" id="caseHero"></div>
+  <div class="case-pager" id="casePager"></div>
+  <div class="case-story" id="caseStory"></div>
+
+  <h2 class="page-h2">Try it — run the 6 a.m. sweep yourself</h2>
+  <div class="demo-card">
+    <div class="demo-head">
+      <span class="noren">賃</span>
+      <div>
+        <strong>Twelve units, two honest alerts, one legal gate</strong>
+        <span class="demo-sub">Run the morning check, move the market-gap threshold, then click an alerted unit — the notice PDF only unlocks after the eligibility check.</span>
+      </div>
+    </div>
+
+    <div class="rp-controls">
+      <button class="mini-btn primary" id="rpRun">☀ Run the 6:00 check</button>
+      <span class="rp-th">乖離しきい値
+        <span class="toggle" id="rpToggle">
+          <button data-th="5">5%</button>
+          <button data-th="10" class="active">10%</button>
+          <button data-th="20">20%</button>
+        </span>
+      </span>
+      <span class="rp-clock" id="rpClock">in production this runs itself — node-cron, 6:00 JST</span>
+    </div>
+
+    <div class="rp-grid" id="rpGrid"></div>
+    <div class="rp-detail" id="rpDetail" hidden></div>
+    <p class="demo-caption" id="rpCaption">The portfolio is asleep. In real life you'd never look at this screen this early — that's the point.</p>
+  </div>
+
+  <h2 class="page-h2">What shipped</h2>
+  <div class="ship-chips" id="shipChips"></div>
+  <p class="case-links" id="caseLinks"></p>
+
+  <div class="case-pager foot" id="casePagerFoot"></div>
+</main>
+
+<footer>AI Sprint — the AI here researches and proposes with sources; the law and a human decide. An alert you can't act on is never raised.</footer>
+
+<div id="tip"></div>
+<script src="data.js"></script>
+<script src="cases.js"></script>
+<script src="rent-pulse.js"></script>
+</body>
+</html>
