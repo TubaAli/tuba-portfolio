@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuba Ali — Sprint 02 · PropertyPulse</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-case="property-pulse">
+
+<header>
+  <div class="brand">
+    <h1>Tuba Ali</h1>
+    <p id="caseTagline"></p>
+  </div>
+  <nav>
+    <a href="index.html">Compass</a>
+    <a href="sprint.html" class="active">AI Sprint</a>
+    <a href="network.html">Network</a>
+  </nav>
+</header>
+
+<main>
+  <div class="case-hero" id="caseHero"></div>
+  <div class="case-pager" id="casePager"></div>
+  <div class="case-story" id="caseStory"></div>
+
+  <h2 class="page-h2">Try it — clear the owner's desk</h2>
+  <div class="demo-card">
+    <div class="demo-head">
+      <span class="noren">宿</span>
+      <div>
+        <strong>Three properties, three formats — one truth</strong>
+        <span class="demo-sub">Drag each report onto the importer (or just tap it). This is the monthly mail the owner used to merge by hand.</span>
+      </div>
+    </div>
+
+    <div class="pp-board">
+      <div class="pp-tray">
+        <h5>The owner's desk — this month's mail</h5>
+        <div id="ppReports"></div>
+        <div class="pp-drop" id="ppDrop">⇣ drop a report here to import</div>
+      </div>
+
+      <div class="pp-dash">
+        <h5>Executive summary — 全物件 consolidated</h5>
+        <div class="pp-kpis" id="ppKpis"></div>
+        <div class="pp-chart">
+          <div class="pp-legend" id="ppLegend"></div>
+          <svg id="ppSvg" viewBox="0 0 640 225" role="img" aria-label="Monthly revenue by property, stacked"></svg>
+        </div>
+        <div class="pp-foot">
+          <button class="mini-btn primary" id="ppExport" disabled>会計ソフトへ — export freee CSV</button>
+          <span class="demo-sub" id="ppFootNote">import all three to unlock the accountant's shortcut</span>
+        </div>
+        <div class="pp-csv" id="ppCsv" hidden></div>
+      </div>
+    </div>
+    <p class="demo-caption" id="ppCaption">&nbsp;</p>
+  </div>
+
+  <h2 class="page-h2">What shipped</h2>
+  <div class="ship-chips" id="shipChips"></div>
+  <p class="case-links" id="caseLinks"></p>
+
+  <div class="case-pager foot" id="casePagerFoot"></div>
+</main>
+
+<footer>AI Sprint — a free pilot for small businesses in Japan. Here the honest answer was a local desktop app: the owner's numbers never leave the owner's machine.</footer>
+
+<div id="tip"></div>
+<script src="data.js"></script>
+<script src="cases.js"></script>
+<script src="property-pulse.js"></script>
+</body>
+</html>

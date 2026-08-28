@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuba Ali — Sprint 05 · LP Scout</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-case="lp-scout">
+
+<header>
+  <div class="brand">
+    <h1>Tuba Ali</h1>
+    <p id="caseTagline"></p>
+  </div>
+  <nav>
+    <a href="index.html">Compass</a>
+    <a href="sprint.html" class="active">AI Sprint</a>
+    <a href="network.html">Network</a>
+  </nav>
+</header>
+
+<main>
+  <div class="case-hero" id="caseHero"></div>
+  <div class="case-pager" id="casePager"></div>
+  <div class="case-story" id="caseStory"></div>
+
+  <h2 class="page-h2">Try it — you're at the dinner</h2>
+  <div class="demo-card">
+    <div class="demo-head">
+      <span class="noren">縁</span>
+      <div>
+        <strong>Log a future investor before the next dish arrives</strong>
+        <span class="demo-sub">You just met someone promising. Open <b>/lp</b>, pick from dropdowns, and watch them land in the team's table and the who-knows-whom graph at once. The clock is running.</span>
+      </div>
+    </div>
+
+    <div class="lp-board">
+      <div class="disc">
+        <div class="disc-head"># lp-scout <span>fund team · 4 members + 1 bot</span></div>
+        <div class="disc-msgs" id="lpMsgs"></div>
+        <div class="lp-cmd" id="lpCmd"></div>
+      </div>
+
+      <div class="lp-dash">
+        <h5>The dashboard — what the whole team sees</h5>
+        <table class="lp-table">
+          <thead><tr><th>name</th><th>met at</th><th>warmth</th><th>knows them</th><th>status</th></tr></thead>
+          <tbody id="lpRows"><tr class="empty-row"><td colspan="5">no prospects yet — the dinner just started</td></tr></tbody>
+        </table>
+        <div class="lp-graph">
+          <svg id="lpSvg" viewBox="0 0 560 300" role="img" aria-label="who-knows-whom network of team members and prospects"></svg>
+        </div>
+      </div>
+    </div>
+    <p class="demo-caption" id="lpCaption">&nbsp;</p>
+  </div>
+
+  <h2 class="page-h2">What shipped</h2>
+  <div class="ship-chips" id="shipChips"></div>
+  <p class="case-links" id="caseLinks"></p>
+
+  <div class="case-pager foot" id="casePagerFoot"></div>
+</main>
+
+<footer>AI Sprint — sometimes the honest AI answer is barely any AI at all: the right dropdowns, in the right app, fifteen seconds from the moment that matters.</footer>
+
+<div id="tip"></div>
+<script src="data.js"></script>
+<script src="cases.js"></script>
+<script src="lp-scout.js"></script>
+</body>
+</html>

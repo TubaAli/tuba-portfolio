@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuba Ali — Sprint 03 · Olo, the AI collaborator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-case="ai-collaborator">
+
+<header>
+  <div class="brand">
+    <h1>Tuba Ali</h1>
+    <p id="caseTagline"></p>
+  </div>
+  <nav>
+    <a href="index.html">Compass</a>
+    <a href="sprint.html" class="active">AI Sprint</a>
+    <a href="network.html">Network</a>
+  </nav>
+</header>
+
+<main>
+  <div class="case-hero" id="caseHero"></div>
+  <div class="case-pager" id="casePager"></div>
+  <div class="case-story" id="caseStory"></div>
+
+  <h2 class="page-h2">Try it — one morning with Olo</h2>
+  <div class="demo-card">
+    <div class="demo-head">
+      <span class="noren">芽</span>
+      <div>
+        <strong>Olo drafts; Tuba sends. Always.</strong>
+        <span class="demo-sub">A real morning, replayed: my professor asks two things — one is a quick reply, one would change an agreement. Watch Olo treat them differently. You can edit the draft before sending.</span>
+      </div>
+    </div>
+
+    <div class="olo-board">
+      <div>
+        <div class="slack">
+          <div class="slack-head"># aps-research <span>Tuba · Joe · Olo 🌱 · AIJoe 🤖</span></div>
+          <div class="slack-msgs" id="oloMsgs"></div>
+          <div class="olo-draft" id="oloDraft" hidden>
+            <span class="dk">Olo's draft — in Tuba's voice</span>
+            <p contenteditable="true" spellcheck="false" id="oloDraftText"></p>
+            <div class="dbtns">
+              <button class="mini-btn primary" id="oloSend">Send as Tuba</button>
+              <span class="dnote">edit it first if you like — Olo learns the correction</span>
+            </div>
+          </div>
+        </div>
+        <button class="day-btn olo-next" id="oloNext">🌱 Olo, draft a reply</button>
+      </div>
+
+      <div>
+        <div class="outline-repo">
+          <h6>research-project-outline/</h6>
+          <p class="or-sub">the single source of truth — agents propose, humans promote</p>
+          <div id="oloFiles"></div>
+        </div>
+        <div class="freq">
+          <span class="fq-k">Communication frequency</span>
+          <div class="freq-bars" id="oloFreq"></div>
+          <p class="fq-note" id="oloFreqNote">before: everything waited for the weekly meeting</p>
+        </div>
+      </div>
+    </div>
+    <p class="demo-caption" id="oloCaption">&nbsp;</p>
+  </div>
+
+  <h2 class="page-h2">What shipped</h2>
+  <div class="ship-chips" id="shipChips"></div>
+  <p class="case-links" id="caseLinks"></p>
+
+  <div class="case-pager foot" id="casePagerFoot"></div>
+</main>
+
+<footer>AI Sprint — this one turned the method on my own research team at SDS. The agent never sends, never decides; it drafts, files, and remembers.</footer>
+
+<div id="tip"></div>
+<script src="data.js"></script>
+<script src="cases.js"></script>
+<script src="ai-collaborator.js"></script>
+</body>
+</html>
