@@ -53,6 +53,11 @@ const PROJECTS = [
     title: "7 granted Japanese patents",
     org: "Payments · advertising · campaign tech", year: "2023–2025",
     blurb: "JP7540062B, JP7603130B1, JP7713543B1, JP7649903B1, JP7749071B1, JP7711276B1, JP7730963B1." },
+  { quadrant: "engineering", t: 0.92, r: 0.66,
+    title: "AI Sprint — 10 businesses challenge",
+    org: "Independent challenge · Tokyo", year: "2026–",
+    blurb: "My challenge to help 10 small businesses with AI, free: consult → build → real feedback → improve → ≥95% satisfaction. 5 of 10 complete. Building a library of real industry pain points, an AI-native services playbook — and startups from what we learn. Sits on the engineering–design boundary.",
+    link: "sprint.html" },
 
   /* --- DESIGN --- */
   { quadrant: "design", t: 0.55, r: 0.55,
@@ -243,6 +248,64 @@ const ORGS = [
       { name: "Pavana Gupta",    role: "Senior Associate, Boston Consulting Group", url: "https://www.linkedin.com/in/pavana-gupta/" },
       { name: "Mansi Khemka",    role: "Software Engineer II, Microsoft", url: "https://www.linkedin.com/in/mansi-khemka/" },
     ] },
+];
+
+/* ---------- AI SPRINT (rendered on sprint.html) ----------
+   done: how many of the 10 sprints are complete — update this number
+   as sprints finish. Cases with status "live" get a full story +
+   interactive demo section; "soon" shows a locked teaser card.       */
+const SPRINT = {
+  site: "https://tubaali.github.io/ai-sprint/",
+  total: 10,
+  done: 5,
+  goals: [
+    { front: "Real pain, real solutions",
+      icon: "①",
+      back: "Collect industry-specific pain points with real pain and a real solution that works. The process forces honesty: consult → build → collect real feedback → improve → ≥95% satisfaction in a survey. No demo-ware." },
+    { front: "An AI-native playbook",
+      icon: "②",
+      back: "Build a knowledge base of what an AI-native service company is, what it can create, and concrete use cases for it — learned from real businesses, not from decks." },
+    { front: "Startups from the learnings",
+      icon: "③",
+      back: "Build startups out of these learnings — and out of the clients we work with along the way. The 10 sprints are the discovery engine." },
+  ],
+  /* the loop shown in the process diagram */
+  loop: ["Consult", "Build", "Real feedback", "Improve", "≥95% satisfaction"],
+  cases: [
+    { n: 1, status: "live", title: "The Izakaya menu",
+      biz: "A 2-person izakaya in Tokyo — a couple in their late 80s, famous for fresh fish",
+      pain: "Their menu is dynamic by design: they buy whatever fish is freshest that morning, and if the right catch isn't there, the menu changes. So every single day they hand-wrote the menu, printed it, and laminated it. For two owners in their late 80s, that daily loop was the heaviest task in the shop.",
+      insight: "This one didn't need AI — and saying so is the point. The right solution had to match the owners' technical fluency, not our tech stack.",
+      solution: "We split every menu into two parts. STATIC — written once, laminated once, forever: set in a large, easy-to-read Japanese font (foreign guests photo-translate the menu with apps, so machine-readability was a design requirement). DYNAMIC — the daily catch on its own laminated sheet, plus custom stickers: 「売り切れ」 (sold out), 「本日なし」 (not today), and dish-photo stickers to cover items. Now a menu update is a 10-second peel-and-stick, not a morning of rewriting." },
+    { n: 2, status: "soon", title: "Case 02" },
+    { n: 3, status: "soon", title: "Case 03" },
+    { n: 4, status: "soon", title: "Case 04" },
+    { n: 5, status: "soon", title: "Case 05" },
+  ],
+};
+
+/* izakaya game: the fish pool the "morning market" draws from */
+const SPRINT_FISH = [
+  { jp: "本日の刺身盛り",   en: "sashimi of the day",    price: "¥1,800" },
+  { jp: "金目鯛の煮付け",   en: "simmered kinmedai",     price: "¥1,400" },
+  { jp: "のどぐろ塩焼き",   en: "grilled nodoguro",      price: "¥1,900" },
+  { jp: "炙りしめ鯖",       en: "seared shime-saba",     price: "¥900"  },
+  { jp: "鰹のたたき",       en: "katsuo tataki",         price: "¥1,100" },
+  { jp: "銀鱈西京焼き",     en: "gindara saikyō-yaki",   price: "¥1,300" },
+  { jp: "岩牡蠣",           en: "iwagaki oyster",        price: "¥800"  },
+  { jp: "鯵フライ",         en: "aji furai",             price: "¥750"  },
+  { jp: "太刀魚の炙り",     en: "seared tachiuo",        price: "¥1,000" },
+  { jp: "帆立バター焼き",   en: "hotate butter-yaki",    price: "¥950"  },
+];
+
+/* izakaya game: the static (laminate-once) side of the menu */
+const SPRINT_STATIC = [
+  { jp: "生ビール",       en: "draft beer",       price: "¥600" },
+  { jp: "日本酒 冷・燗", en: "sake, cold / hot", price: "¥700" },
+  { jp: "枝豆",           en: "edamame",          price: "¥400" },
+  { jp: "だし巻き玉子",   en: "dashimaki tamago", price: "¥550" },
+  { jp: "ポテトサラダ",   en: "potato salad",     price: "¥450" },
+  { jp: "焼きおにぎり",   en: "yaki onigiri",     price: "¥350" },
 ];
 
 /* ---------- PROFILE SECTIONS (rendered on the compass page) ---------- */
