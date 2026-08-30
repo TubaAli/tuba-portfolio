@@ -101,6 +101,64 @@
     }
   });
 
+  /* ---- protocol v2 · the five-step flow ---- */
+  const FLOW = [
+    ["💬", "Someone suggests a change", "Joe: “should we switch methods?”"],
+    ["🗂️", "Agent files it", "an open point, with a proof link"],
+    ["👍👍", "Both humans react", "two 👍 = yes · one 🚩 = pause"],
+    ["🔀", "Agent merges", "only when every item has both 👍"],
+    ["📗", "Human makes it law", "moved into DECISIONS.md"],
+  ];
+  const flow = $("oloFlow");
+  FLOW.forEach((s, i) => {
+    if (i) { const a = document.createElement("span"); a.className = "flow-arrow"; a.textContent = "→"; flow.appendChild(a); }
+    const d = document.createElement("div");
+    d.className = "flow-step";
+    d.innerHTML = `<span class="fe">${s[0]}</span><b>${s[1]}</b><span>${s[2]}</span>`;
+    flow.appendChild(d);
+  });
+
+  /* ---- protocol v2 · rulebook flip cards ---- */
+  const RULES = [
+    ["📁", "Files beat chat", "If it's not in the six files, it's not agreed. Chat is just talk — the repo is the truth."],
+    ["✍️", "Humans hold the pen", "Goals, deadlines, methods, decisions: only humans can change them. Agents may only suggest."],
+    ["👍👍", "Two thumbs = yes", "Nothing counts until both humans 👍 the same message. Agents never 👍 — that emoji belongs to humans."],
+    ["🚩", "One flag = pause", "Either human can freeze any item with 🚩. It goes back to discussion, no hard feelings."],
+    ["🧾", "Show your proof", "Every proposal must link the exact message that caused it. No link, no proposal."],
+    ["🔕", "Don't spam the prof", "Only goal, deadline, or open-point changes ping a human right away. Everything else waits for the daily brief."],
+    ["🤝", "Agents talk to agents", "Olo never pings Joe. It asks AIJoe — and AIJoe decides if Joe really needs a ping."],
+    ["🌅", "One brief a day", "Agreed · Remaining · For Tuba · For Joe. Four lists, once a day, like a stand-up."],
+    ["🙋", "Humans still meet", "One weekly sync with no agents in the room. The agents only prepare the agenda."],
+    ["📊", "The agent gets graded", "Every 🚩 counts against it. Fewer flags means a better collaborator — we measure it weekly."],
+  ];
+  const rules = $("oloRules");
+  RULES.forEach(r => {
+    const c = document.createElement("div");
+    c.className = "flip"; c.setAttribute("role", "button"); c.tabIndex = 0;
+    c.innerHTML = `<div class="flip-inner">
+        <div class="flip-face front"><span class="fe">${r[0]}</span><b>${r[1]}</b><i>tap to flip</i></div>
+        <div class="flip-face back">${r[2]}</div>
+      </div>`;
+    const flipIt = () => c.classList.toggle("flipped");
+    c.addEventListener("click", flipIt);
+    c.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flipIt(); } });
+    rules.appendChild(c);
+  });
+
+  /* ---- protocol v2 · the daily huddle board ---- */
+  const HUDDLE = [
+    ["✅ Agreed", ["pairwise scoring → DECISIONS.md", "survey moved to Thursday"]],
+    ["⏳ Remaining", ["session timing test", "draft the stimuli pool"]],
+    ["🙋‍♀️ For Tuba", ["pick the native-speaker checker"]],
+    ["🙋 For Joe", ["confirm the ethics deadline"]],
+  ];
+  $("oloHuddle").innerHTML =
+    `<div class="huddle-head">🌱 <b>Olo</b> — morning brief <span class="when">8:15</span></div>
+     <div class="huddle-grid">${HUDDLE.map(c =>
+       `<div class="hud-col"><h5>${c[0]}</h5>${c[1].map(x => `<span class="chip">${x}</span>`).join("")}</div>`).join("")}
+     </div>
+     <p class="huddle-foot">🤝 Anything that doesn't need a human, Olo answers directly in AIJoe's brief thread — so the humans only ever see the lists that need <em>them</em>.</p>`;
+
   $("oloSend").addEventListener("click", () => {
     const text = $("oloDraftText").textContent.trim() || DRAFT;
     $("oloDraft").hidden = true;
