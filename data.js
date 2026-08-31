@@ -205,7 +205,16 @@ const ORGS = [
     ] },
   { name: "Smart India Hackathon", role: "Winner 2019 — Rog Alert", cat: "recognition", people: [] },
   /* add url: "assets/hpair-certificate.pdf" once the certificate file is in assets/ */
-  { name: "Harvard Project for Asian and International Relations (HPAIR)", role: "Delegate 2018", cat: "recognition", people: [] },
+  { name: "Harvard Project for Asian and International Relations (HPAIR)", role: "Delegate 2018", cat: "recognition",
+    people: [
+      { name: "Ishita Saxena",   role: "HPAIR 2018" },
+      { name: "Ram Ramisetti",   role: "HPAIR 2018" },
+      { name: "Sonal Chopra",    role: "HPAIR 2018" },
+      { name: "Amish Shah",      role: "HPAIR 2018" },
+      { name: "Martin Roll",     role: "HPAIR 2018" },
+      { name: "Manmeet Kaur",    role: "HPAIR 2018" },
+      { name: "Vidushi Rajoria", role: "HPAIR 2018" },
+    ] },
   { name: "Mentors & Friends", role: "People who shaped my journey", cat: "mentors",
     people: [
       { name: "Santanu Bhattacharya", role: "Chief Technologist, NatWest · Visiting Professor, IISc · Co-Founder, S20.AI", url: "https://www.linkedin.com/in/santanub/" },
