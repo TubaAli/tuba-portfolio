@@ -28,7 +28,7 @@
   <h2 class="page-h2">The system — two agents, one source of truth</h2>
   <p class="section-note">Two humans, each with a personal agent, around one shared outline repo. Follow the numbers.</p>
   <div class="diagram-card">
-    <svg viewBox="0 0 920 480" role="img" aria-label="Two humans and their two agents coordinate through a Slack channel; both agents propose per-item PRs into the shared outline repo, which merges only after every human thumbs-up">
+    <svg viewBox="0 0 920 435" role="img" aria-label="Two agents carry the project context and talk to each other in the Slack channel; humans ask their own agent for details; trivial tasks are settled agent-to-agent, non-trivial ones become PRs that merge only after every human thumbs-up">
       <defs>
         <marker id="dgArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,0 L8,4 L0,8 z" class="dg-head"/>
@@ -52,11 +52,11 @@
       <!-- agents -->
       <rect x="40" y="230" width="200" height="64" rx="12" class="dg-box"/>
       <text x="140" y="257" class="dg-t">🌱 Olo — my agent</text>
-      <text x="140" y="277" class="dg-s">drafts in my voice</text>
+      <text x="140" y="277" class="dg-s">slack · session logs · my repos</text>
 
       <rect x="680" y="230" width="200" height="64" rx="12" class="dg-box"/>
       <text x="780" y="257" class="dg-t">🤖 my professor's agent</text>
-      <text x="780" y="277" class="dg-s">same rulebook, other side</text>
+      <text x="780" y="277" class="dg-s">same rulebook, their context</text>
 
       <!-- outline repo -->
       <rect x="340" y="140" width="240" height="250" rx="14" class="dg-box repo"/>
@@ -70,31 +70,30 @@
       <text x="362" y="358" class="dg-file">📄 TRACKING.md</text>
 
       <!-- lines -->
-      <line x1="240" y1="58" x2="336" y2="54" class="dg-line" marker-end="url(#dgArrow)"/>
-      <line x1="680" y1="58" x2="584" y2="54" class="dg-line" marker-end="url(#dgArrow)"/>
-      <line x1="140" y1="94" x2="140" y2="226" class="dg-line" marker-end="url(#dgArrow)"/>
-      <line x1="780" y1="94" x2="780" y2="226" class="dg-line" marker-end="url(#dgArrow)"/>
-      <line x1="368" y1="94" x2="206" y2="227" class="dg-line" marker-end="url(#dgArrow)"/>
-      <line x1="552" y1="94" x2="714" y2="227" class="dg-line" marker-end="url(#dgArrow)"/>
+      <line x1="240" y1="58" x2="336" y2="54" class="dg-line" marker-start="url(#dgArrow)" marker-end="url(#dgArrow)"/>
+      <line x1="680" y1="58" x2="584" y2="54" class="dg-line" marker-start="url(#dgArrow)" marker-end="url(#dgArrow)"/>
+      <line x1="140" y1="98" x2="140" y2="226" class="dg-line" marker-start="url(#dgArrow)" marker-end="url(#dgArrow)"/>
+      <line x1="780" y1="98" x2="780" y2="226" class="dg-line" marker-start="url(#dgArrow)" marker-end="url(#dgArrow)"/>
+      <line x1="364" y1="98" x2="210" y2="227" class="dg-line dash" marker-start="url(#dgArrow)" marker-end="url(#dgArrow)"/>
+      <line x1="556" y1="98" x2="710" y2="227" class="dg-line dash" marker-start="url(#dgArrow)" marker-end="url(#dgArrow)"/>
       <line x1="240" y1="278" x2="336" y2="286" class="dg-line" marker-end="url(#dgArrow)"/>
       <line x1="680" y1="278" x2="584" y2="286" class="dg-line" marker-end="url(#dgArrow)"/>
-      <polyline points="140,294 140,438 780,438 780,294" class="dg-line dash" marker-end="url(#dgArrow)"/>
 
       <!-- numbered badges -->
       <g class="dg-badge"><circle cx="288" cy="42" r="10"/><text x="288" y="46">1</text></g>
-      <g class="dg-badge"><circle cx="272" cy="158" r="10"/><text x="272" y="162">2</text></g>
-      <g class="dg-badge"><circle cx="288" cy="300" r="10"/><text x="288" y="304">3</text></g>
+      <g class="dg-badge"><circle cx="122" cy="162" r="10"/><text x="122" y="166">2</text></g>
+      <g class="dg-badge"><circle cx="272" cy="160" r="10"/><text x="272" y="164">3</text></g>
       <g class="dg-badge"><circle cx="460" cy="112" r="10"/><text x="460" y="116">4</text></g>
-      <g class="dg-badge"><circle cx="460" cy="410" r="10"/><text x="460" y="414">5</text></g>
-      <g class="dg-badge"><circle cx="460" cy="438" r="10"/><text x="460" y="442">6</text></g>
+      <g class="dg-badge"><circle cx="288" cy="300" r="10"/><text x="288" y="304">5</text></g>
+      <g class="dg-badge"><circle cx="460" cy="412" r="10"/><text x="460" y="416">6</text></g>
     </svg>
     <p class="dg-legend">
-      <span><b>1</b> humans talk in the channel</span>
-      <span><b>2</b> each agent reads chat, session logs and open PRs daily — and posts the huddle</span>
-      <span><b>3</b> every change: one per-item PR thread, with a proof link</span>
-      <span><b>4</b> both 👍 = yes · one 🚩 = pause</span>
-      <span><b>5</b> a change merges only after every 👍</span>
-      <span><b>6</b> agents hand off to each other — never ping the other human</span>
+      <span><b>1</b> humans answer, do the research — and talk in the channel or in person when needed</span>
+      <span><b>2</b> humans ask their own agent for details or a simple explanation</span>
+      <span><b>3</b> agents talk to each other on the channel — with all the data: slack, session logs, repos</span>
+      <span><b>4</b> simple / trivial tasks: settled agent-to-agent, right there</span>
+      <span><b>5</b> non-trivial: the agent drafts or raises a PR — and waits for the humans' 👍</span>
+      <span><b>6</b> merge lands only after every 👍</span>
     </p>
   </div>
 
@@ -104,7 +103,7 @@
       <span class="noren">芽</span>
       <div>
         <strong>Olo drafts; Tuba sends. Always.</strong>
-        <span class="demo-sub">A real morning, replayed: my professor asks two things — one is a quick reply, one would change an agreement. Watch Olo treat them differently. You can edit the draft before sending.</span>
+        <span class="demo-sub">A real morning, replayed: my professor asks two things — a quick reply, and one that would change an agreement. Watch Olo treat them differently. Edit the draft before sending, if you like.</span>
       </div>
     </div>
 
