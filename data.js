@@ -176,6 +176,8 @@ const ORGS = [
   { name: "Independent AI Projects", role: "Advisor — KK myAshisuto (AI trust architecture) · NEXTPUBLIC (AI/DX, public sector)", cat: "advisory",
     people: [
       { name: "Tak Adachi", role: "Queensland–Japan collaboration" },
+      { name: "Cali Matsunaga", role: "Founder & CEO, KK myAshisuto", url: "https://www.linkedin.com/in/cali-shizuru-matsunaga/" },
+      { name: "Shoto Terui",    role: "Director & CFO, NEXTPUBLIC",   url: "https://shototerui.com/" },
     ] },
   { name: "JITTN — Nippon Foundation · Salzburg Global",
     role: "Fellow, 2025 Cohort — Japan-India Transformative Technology Network; Project Lead, Live-Tech Highway & VISTORA",
