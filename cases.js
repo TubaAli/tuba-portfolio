@@ -46,11 +46,13 @@
   /* ---- story ---- */
   const story = $("caseStory");
   if (story) {
-    story.innerHTML =
-      `<div class="story-block"><span class="story-k">The business</span><p>${c.biz}.</p></div>
-       <div class="story-block"><span class="story-k">The pain</span><p>${c.pain}</p></div>
-       <div class="story-block insight"><span class="story-k">The honest call</span><p>${c.insight}</p></div>
-       <div class="story-block"><span class="story-k">The solution</span><p>${c.solution}</p></div>`;
+    story.innerHTML = c.story
+      ? c.story.map(b =>
+          `<div class="story-block${b.hl ? " insight" : ""}"><span class="story-k">${b.k}</span><p>${b.p}</p></div>`).join("")
+      : `<div class="story-block"><span class="story-k">The business</span><p>${c.biz}.</p></div>
+         <div class="story-block"><span class="story-k">The pain</span><p>${c.pain}</p></div>
+         <div class="story-block insight"><span class="story-k">The honest call</span><p>${c.insight}</p></div>
+         <div class="story-block"><span class="story-k">The solution</span><p>${c.solution}</p></div>`;
   }
 
   /* ---- what shipped + links ---- */
