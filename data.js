@@ -205,7 +205,16 @@ const ORGS = [
     ] },
   { name: "Smart India Hackathon", role: "Winner 2019 — Rog Alert", cat: "recognition", people: [] },
   /* add url: "assets/hpair-certificate.pdf" once the certificate file is in assets/ */
-  { name: "Harvard Project for Asian and International Relations (HPAIR)", role: "Delegate 2018", cat: "recognition", people: [] },
+  { name: "Harvard Project for Asian and International Relations (HPAIR)", role: "Delegate 2018", cat: "recognition",
+    people: [
+      { name: "[redacted]",   role: "HPAIR 2018" },
+      { name: "[redacted]",   role: "HPAIR 2018" },
+      { name: "[redacted]",    role: "HPAIR 2018" },
+      { name: "[redacted]",      role: "HPAIR 2018" },
+      { name: "[redacted]",     role: "HPAIR 2018" },
+      { name: "[redacted]",    role: "HPAIR 2018" },
+      { name: "[redacted]", role: "HPAIR 2018" },
+    ] },
   { name: "Mentors & Friends", role: "People who shaped my journey", cat: "mentors",
     people: [
       { name: "[redacted]", role: "Chief Technologist, NatWest · Visiting Professor, IISc · Co-Founder, S20.AI", url: "https://www.linkedin.com/" },
