@@ -690,3 +690,42 @@ a.lantern { display: inline-block; text-decoration: none; color: inherit; }
   border: 1px solid var(--hairline); border-radius: 8px; padding: 5px 8px; margin-top: 6px;
 }
 .huddle-foot { font-size: 12.5px; color: var(--ink-2); margin-top: 12px; }
+
+/* ---- Sprint 03 · philosophy, key decisions, roadmap ---- */
+.olo-flow.creed { margin-top: 14px; }
+.kd-list { display: grid; gap: 10px; margin-top: 14px; }
+.kd {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--hairline);
+  border-radius: 14px; padding: 12px 14px;
+}
+.kd-n {
+  flex: none; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--ink); color: var(--page);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; margin-top: 1px;
+}
+.kd b { font-size: 14px; }
+.kd p { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.huddle.roadmap .hud-col h5 { color: var(--ink); font-size: 13px; }
+
+/* ---- Sprint 03 · two-agent system diagram ---- */
+.diagram-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 16px; padding: 12px 12px 4px; }
+.diagram-card svg { display: block; width: 100%; height: auto; }
+.dg-box { fill: var(--page); stroke: var(--hairline); }
+.dg-box.hot { stroke: var(--baseline); }
+.dg-box.repo { fill: var(--surface); stroke: var(--baseline); }
+.dg-t { font-size: 14px; font-weight: 600; fill: var(--ink); text-anchor: middle; }
+.dg-s { font-size: 11.5px; fill: var(--muted); text-anchor: middle; }
+.dg-file { font-size: 12.5px; fill: var(--ink-2); }
+.dg-line { stroke: var(--baseline); stroke-width: 1.4; fill: none; }
+.dg-line.dash { stroke-dasharray: 5 5; }
+.dg-head { fill: var(--baseline); }
+.dg-badge circle { fill: var(--ink); }
+.dg-badge text { font-size: 11px; font-weight: 700; fill: var(--page); text-anchor: middle; }
+.dg-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 10px 6px 8px; font-size: 12.5px; color: var(--ink-2); }
+.dg-legend b {
+  display: inline-flex; width: 17px; height: 17px; border-radius: 50%;
+  background: var(--ink); color: var(--page); font-size: 11px;
+  align-items: center; justify-content: center; margin-right: 5px;
+}

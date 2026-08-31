@@ -25,6 +25,79 @@
   <div class="case-pager" id="casePager"></div>
   <div class="case-story" id="caseStory"></div>
 
+  <h2 class="page-h2">The system — two agents, one source of truth</h2>
+  <p class="section-note">Two humans, each with a personal agent, around one shared outline repo. Follow the numbers.</p>
+  <div class="diagram-card">
+    <svg viewBox="0 0 920 480" role="img" aria-label="Two humans and their two agents coordinate through a Slack channel; both agents propose per-item PRs into the shared outline repo, which merges only after every human thumbs-up">
+      <defs>
+        <marker id="dgArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L8,4 L0,8 z" class="dg-head"/>
+        </marker>
+      </defs>
+
+      <!-- humans -->
+      <rect x="40" y="30" width="200" height="64" rx="12" class="dg-box"/>
+      <text x="140" y="57" class="dg-t">🙋‍♀️ Me — researcher</text>
+      <text x="140" y="77" class="dg-s">PM by day · Master's research</text>
+
+      <rect x="680" y="30" width="200" height="64" rx="12" class="dg-box"/>
+      <text x="780" y="57" class="dg-t">🧑‍🏫 My professor</text>
+      <text x="780" y="77" class="dg-s">and the lab team</text>
+
+      <!-- slack -->
+      <rect x="340" y="20" width="240" height="74" rx="12" class="dg-box hot"/>
+      <text x="460" y="50" class="dg-t"># project channel — Slack</text>
+      <text x="460" y="70" class="dg-s">questions · 👍 / 🚩 · daily huddles</text>
+
+      <!-- agents -->
+      <rect x="40" y="230" width="200" height="64" rx="12" class="dg-box"/>
+      <text x="140" y="257" class="dg-t">🌱 Olo — my agent</text>
+      <text x="140" y="277" class="dg-s">drafts in my voice</text>
+
+      <rect x="680" y="230" width="200" height="64" rx="12" class="dg-box"/>
+      <text x="780" y="257" class="dg-t">🤖 my professor's agent</text>
+      <text x="780" y="277" class="dg-s">same rulebook, other side</text>
+
+      <!-- outline repo -->
+      <rect x="340" y="140" width="240" height="250" rx="14" class="dg-box repo"/>
+      <text x="460" y="168" class="dg-t">research-project-outline/</text>
+      <text x="460" y="188" class="dg-s">the single source of truth</text>
+      <text x="362" y="218" class="dg-file">📄 GOALS.md</text>
+      <text x="362" y="246" class="dg-file">📄 CONSTRAINTS.md</text>
+      <text x="362" y="274" class="dg-file">📄 METHODS.md</text>
+      <text x="362" y="302" class="dg-file">📄 DECISIONS.md</text>
+      <text x="362" y="330" class="dg-file">📄 UNAGREED.md</text>
+      <text x="362" y="358" class="dg-file">📄 TRACKING.md</text>
+
+      <!-- lines -->
+      <line x1="240" y1="58" x2="336" y2="54" class="dg-line" marker-end="url(#dgArrow)"/>
+      <line x1="680" y1="58" x2="584" y2="54" class="dg-line" marker-end="url(#dgArrow)"/>
+      <line x1="140" y1="94" x2="140" y2="226" class="dg-line" marker-end="url(#dgArrow)"/>
+      <line x1="780" y1="94" x2="780" y2="226" class="dg-line" marker-end="url(#dgArrow)"/>
+      <line x1="368" y1="94" x2="206" y2="227" class="dg-line" marker-end="url(#dgArrow)"/>
+      <line x1="552" y1="94" x2="714" y2="227" class="dg-line" marker-end="url(#dgArrow)"/>
+      <line x1="240" y1="278" x2="336" y2="286" class="dg-line" marker-end="url(#dgArrow)"/>
+      <line x1="680" y1="278" x2="584" y2="286" class="dg-line" marker-end="url(#dgArrow)"/>
+      <polyline points="140,294 140,438 780,438 780,294" class="dg-line dash" marker-end="url(#dgArrow)"/>
+
+      <!-- numbered badges -->
+      <g class="dg-badge"><circle cx="288" cy="42" r="10"/><text x="288" y="46">1</text></g>
+      <g class="dg-badge"><circle cx="272" cy="158" r="10"/><text x="272" y="162">2</text></g>
+      <g class="dg-badge"><circle cx="288" cy="300" r="10"/><text x="288" y="304">3</text></g>
+      <g class="dg-badge"><circle cx="460" cy="112" r="10"/><text x="460" y="116">4</text></g>
+      <g class="dg-badge"><circle cx="460" cy="410" r="10"/><text x="460" y="414">5</text></g>
+      <g class="dg-badge"><circle cx="460" cy="438" r="10"/><text x="460" y="442">6</text></g>
+    </svg>
+    <p class="dg-legend">
+      <span><b>1</b> humans talk in the channel</span>
+      <span><b>2</b> each agent reads chat, session logs and open PRs daily — and posts the huddle</span>
+      <span><b>3</b> every change: one per-item PR thread, with a proof link</span>
+      <span><b>4</b> both 👍 = yes · one 🚩 = pause</span>
+      <span><b>5</b> a change merges only after every 👍</span>
+      <span><b>6</b> agents hand off to each other — never ping the other human</span>
+    </p>
+  </div>
+
   <h2 class="page-h2">Try it — one morning with Olo</h2>
   <div class="demo-card">
     <div class="demo-head">
@@ -38,7 +111,7 @@
     <div class="olo-board">
       <div>
         <div class="slack">
-          <div class="slack-head"># aps-research <span>Tuba · Joe · Olo 🌱 · AIJoe 🤖</span></div>
+          <div class="slack-head"># project-channel <span>Tuba · my professor · Olo 🌱 · prof's agent 🤖</span></div>
           <div class="slack-msgs" id="oloMsgs"></div>
           <div class="olo-draft" id="oloDraft" hidden>
             <span class="dk">Olo's draft — in Tuba's voice</span>
@@ -72,16 +145,23 @@
   <p class="section-note">No idea travels by vibes. Every change walks the same five steps — humans in the middle, always.</p>
   <div class="olo-flow" id="oloFlow"></div>
 
+  <h2 class="page-h2">Design philosophy</h2>
+  <div class="olo-flow creed" id="oloPhil"></div>
+
   <h2 class="page-h2">The rulebook — tap a card</h2>
   <p class="section-note">My professor and I wrote the rules; the agents obey them. Ten rules, one card each — tap to flip.</p>
   <div class="flip-grid" id="oloRules"></div>
+
+  <h2 class="page-h2">Key decisions along the way</h2>
+  <div class="kd-list" id="oloDecisions"></div>
 
   <h2 class="page-h2">The daily huddle</h2>
   <p class="section-note">Once a day, each agent posts one brief. Four lists, no essays.</p>
   <div class="huddle" id="oloHuddle"></div>
 
-  <h2 class="page-h2">What shipped</h2>
-  <div class="ship-chips" id="shipChips"></div>
+  <h2 class="page-h2">Roadmap</h2>
+  <p class="section-note">Shipped → Now → Next → Later — the same roadmap format I run as a product manager.</p>
+  <div class="huddle roadmap" id="oloRoadmap"></div>
   <p class="case-links" id="caseLinks"></p>
 
   <div class="case-pager foot" id="casePagerFoot"></div>
