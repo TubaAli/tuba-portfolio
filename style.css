@@ -729,3 +729,11 @@ a.lantern { display: inline-block; text-decoration: none; color: inherit; }
   background: var(--ink); color: var(--page); font-size: 11px;
   align-items: center; justify-content: center; margin-right: 5px;
 }
+
+/* ---- network: passphrase unlock ---- */
+.unlock { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.unlock input { font: inherit; padding: 6px 10px; border: 1px solid var(--line, #ccc); border-radius: 8px; background: var(--page, #fff); color: inherit; min-width: 220px; }
+.unlock button { font: inherit; padding: 6px 12px; border: 0; border-radius: 8px; background: var(--ink, #222); color: var(--page, #fff); cursor: pointer; }
+.unlock-msg { font-size: 13px; opacity: .8; }
+.unlock-msg.err { color: #c0392b; opacity: 1; }
+.unlock.done { display: none; }
