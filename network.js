@@ -22,11 +22,49 @@
     const a = (i / ORGS.length) * Math.PI * 2 - Math.PI / 2;
     return {
       id: "org" + i, org: o, label: o.name, role: o.role, cat: o.cat,
-      r: 13, expandable: o.people.length > 0, expanded: false,
+      r: 13, expandable: o.people.length > 0 || (o.peopleCount || 0) > 0, expanded: false,
       x: W / 2 + Math.cos(a) * 225, y: H / 2 + Math.sin(a) * 225, vx: 0, vy: 0,
     };
   });
   const personNodes = new Map(); /* orgNode.id -> [nodes] */
+
+  /* ---- encrypted people: unlock with passphrase (decrypts in-browser only) ---- */
+  const unlockForm = document.getElementById("unlock");
+  const unlockInput = document.getElementById("unlock-pass");
+  const unlockMsg = document.getElementById("unlock-msg");
+  const isLocked = node => !!node.org && node.org.people.length === 0 && (node.org.peopleCount || 0) > 0;
+  const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  async function decryptPeople(passphrase) {
+    const enc = new TextEncoder();
+    const base = await crypto.subtle.importKey("raw", enc.encode(passphrase), "PBKDF2", false, ["deriveKey"]);
+    const key = await crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt: b64(PEOPLE_ENC.salt), iterations: PEOPLE_ENC.iterations, hash: "SHA-256" },
+      base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+    const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(PEOPLE_ENC.iv) }, key, b64(PEOPLE_ENC.data));
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
+  if (unlockForm && typeof PEOPLE_ENC !== "undefined") {
+    if (!ORGS.some(o => (o.peopleCount || 0) > 0 && o.people.length === 0)) unlockForm.classList.add("done");
+    unlockForm.addEventListener("submit", async e => {
+      e.preventDefault();
+      unlockMsg.className = "unlock-msg";
+      unlockMsg.textContent = "Decrypting…";
+      try {
+        const people = await decryptPeople(unlockInput.value);
+        ORGS.forEach((o, i) => { o.people = people[i] || []; });
+        personNodes.clear();
+        orgNodes.forEach(n => { n.expandable = n.org.people.length > 0; });
+        unlockForm.classList.add("done");
+        rebuild();
+      } catch (err) {
+        unlockMsg.className = "unlock-msg err";
+        unlockMsg.textContent = "Wrong passphrase.";
+        unlockInput.select();
+      }
+    });
+  } else if (unlockForm) {
+    unlockForm.classList.add("done");
+  }
 
   let nodes = [], links = [], raf = null, alpha = 0;
 
@@ -114,7 +152,8 @@
         s.setAttribute("class", "sub");
         s.setAttribute("text-anchor", "middle");
         s.setAttribute("y", node.r + 28);
-        s.textContent = node.expanded ? "click to collapse" : `+ ${node.org.people.length} people`;
+        s.textContent = isLocked(node) ? `🔒 ${node.org.peopleCount} people`
+          : node.expanded ? "click to collapse" : `+ ${node.org.people.length} people`;
         g.appendChild(s);
       }
       svg.appendChild(g);
@@ -124,7 +163,11 @@
         g.style.cursor = "pointer";
         g.addEventListener("click", () => {
           if (g.__dragged) return;
-          if (node.expandable) {
+          if (isLocked(node)) {
+            unlockInput.focus();
+            unlockMsg.textContent = "Enter the passphrase to see people.";
+            unlockMsg.className = "unlock-msg";
+          } else if (node.expandable) {
             node.expanded = !node.expanded;
             rebuild();
           } else if (node.org.url) {
@@ -226,7 +269,9 @@
   function attachTip(g, node) {
     g.addEventListener("pointermove", e => {
       if (node.center) return;
-      const hint = node.expandable && !node.person
+      const hint = isLocked(node)
+        ? `<br><em>🔒 enter the passphrase to see people</em>`
+        : node.expandable && !node.person
         ? `<br><em>${node.expanded ? "click to hide people" : "click to see people"}</em>`
         : node.person && node.url
           ? `<br><em>click → ${node.url.includes("/search/") ? "find on LinkedIn" : "profile"}</em>`

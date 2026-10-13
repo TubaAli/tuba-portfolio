@@ -23,6 +23,12 @@
 <main>
   <div class="controls">
     <div class="legend" id="legend"></div>
+    <form id="unlock" class="unlock" autocomplete="off">
+      <span class="unlock-icon" aria-hidden="true">🔒</span>
+      <input id="unlock-pass" type="password" placeholder="Passphrase to see people" aria-label="Passphrase to see people">
+      <button type="submit">Unlock</button>
+      <span id="unlock-msg" class="unlock-msg" role="status"></span>
+    </form>
   </div>
 
   <div class="graph-card">
@@ -30,6 +36,7 @@
   </div>
   <p class="section-note" style="margin-top:14px">
     Organizations I am or was part of — <strong>click one marked “+” to meet the people</strong> I work with there.
+    The people are stored encrypted; enter the passphrase above to reveal them.
     Drag nodes to rearrange; hover for the relationship.
   </p>
 </main>
